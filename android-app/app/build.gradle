@@ -21,10 +21,22 @@ android {
         buildConfigField "String", "BASE_URL", "\"http://10.0.2.2:8080/api/\""
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../ewaste-release-key.jks")
+            storePassword System.getenv("RELEASE_STORE_PASSWORD")
+            keyAlias "ewaste-key"
+            keyPassword System.getenv("RELEASE_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://ewastetracking.onrender.com/api/\""
+            //                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ replace this
         }
         debug {
             buildConfigField "String", "BASE_URL", "\"http://10.0.2.2:8080/api/\""
