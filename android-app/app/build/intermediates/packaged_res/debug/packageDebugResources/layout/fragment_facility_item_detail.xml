@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Back navigation header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_list"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/primary_green"
+                    android:contentDescription="Back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Facility Triage &amp; Processing"
+                    android:textColor="@color/text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Device Summary Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider_color">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tvCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Category"
+                            android:textColor="@color/primary_green_dark"
+                            android:background="@color/primary_green_light"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvSubmitter"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="by Submitter"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="STATUS"
+                            android:textColor="@color/white"
+                            android:background="@color/primary_green"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Device Description"
+                        android:textColor="@color/text_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDropOffLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Drop-off Center"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+
+                    <!-- Counters -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/bg_screen"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvComponentsCount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="⚙️ Harvested: 0"
+                            android:textColor="@color/primary_green_dark"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvHazardousCount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="☣️ Hazardous: 0"
+                            android:textColor="@color/secondary_orange"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Actions Panel Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider_color">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Facility Operations"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Mark Received Action -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnMarkReceived"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="📥 Mark as Received at Facility"
+                        android:backgroundTint="@color/status_received"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:cornerRadius="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <!-- Categorize Action -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCategorize"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="🔍 Categorize / Triage Inspection"
+                        android:backgroundTint="@color/status_categorized"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:cornerRadius="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <!-- Harvest Component Action -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHarvestComponent"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="⚙️ Harvest Reusable Component"
+                        android:backgroundTint="@color/primary_green"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:cornerRadius="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <!-- Flag Hazardous Material Action -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFlagHazardous"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="☣️ Flag Hazardous Material"
+                        android:backgroundTint="@color/status_hazardous"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:cornerRadius="10dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Tracking Timeline Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Lifecycle Tracking History"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
+
+            <!-- Timeline List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTimeline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

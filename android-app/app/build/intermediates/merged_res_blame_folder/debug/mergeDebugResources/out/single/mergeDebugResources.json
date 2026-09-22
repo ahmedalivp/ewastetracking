@@ -1,0 +1,238 @@
+[
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_dialog_redeem_credit.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/dialog_redeem_credit.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/menu_menu_consumer_nav.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/menu/menu_consumer_nav.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_item_detail.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_item_detail.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_email.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_email.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_marketplace_component.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_marketplace_component.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_activity_admin_main.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/activity_admin_main.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/menu_menu_toolbar.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/menu/menu_toolbar.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_activity_consumer_main.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/activity_consumer_main.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_credits.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_credits.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_dialog_harvest_component.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/dialog_harvest_component.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_item_admin_facility.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/item_admin_facility.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_dialog_categorize.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/dialog_categorize.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_submit.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_submit.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_drop_off_point.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_drop_off_point.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/color_selector_nav_item.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/color/selector_nav_item.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_item_drop_off_point.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/item_drop_off_point.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_component_request.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_component_request.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_activity_login.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_activity_facility_main.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/activity_facility_main.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_list.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_list.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_bg_circle_dot.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/bg_circle_dot.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_eco_recycle.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_eco_recycle.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_activity_splash.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_submission.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_submission.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_credit.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_credit.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_my_requests.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_my_requests.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_item_submission.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/item_submission.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_credit.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_credit.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_person.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/drawable_ic_qr_code.xml.flat",
+        "source": "com.ewaste.app-main-50:/drawable/ic_qr_code.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_dialog_map_preview.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/dialog_map_preview.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_inventory_component.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_inventory_component.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_intake_queue.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_intake_queue.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_activity_business_main.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/activity_business_main.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_dialog_request_component.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/dialog_request_component.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_bg_icon_chip.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/bg_icon_chip.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_fragment_intake_queue.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/fragment_intake_queue.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_activity_register.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/activity_register.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_drop_off_points.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_drop_off_points.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_dialog_flag_hazardous.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/dialog_flag_hazardous.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_facility_item_detail.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_facility_item_detail.xml"
+    },
+    {
+        "merged": "com.ewaste.app-debug-48:/layout_dialog_qr_code.xml.flat",
+        "source": "com.ewaste.app-main-50:/layout/dialog_qr_code.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_marketplace.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_marketplace.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_my_submissions.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_my_submissions.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/menu_menu_facility_nav.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/menu/menu_facility_nav.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_drop_off.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_drop_off.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/menu_menu_business_nav.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/menu/menu_business_nav.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_bg_hero_gradient.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/bg_hero_gradient.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_bg_status_pill.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/bg_status_pill.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_tracking_record.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_tracking_record.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_item_intake_queue.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/item_intake_queue.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_submit_ewaste.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_submit_ewaste.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_inventory.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_inventory.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_browse_components.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_browse_components.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/layout_fragment_inventory.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/layout/fragment_inventory.xml"
+    },
+    {
+        "merged": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-debug-48:/drawable_ic_lock.xml.flat",
+        "source": "/home/ahmed/.gradle/daemon/8.6/com.ewaste.app-main-50:/drawable/ic_lock.xml"
+    }
+]

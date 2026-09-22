@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_drop_off"
+        android:icon="@drawable/ic_drop_off"
+        android:title="@string/nav_drop_off" />
+    <item
+        android:id="@+id/nav_submit"
+        android:icon="@drawable/ic_submit"
+        android:title="@string/nav_submit" />
+    <item
+        android:id="@+id/nav_my_items"
+        android:icon="@drawable/ic_list"
+        android:title="@string/nav_my_items" />
+    <item
+        android:id="@+id/nav_credits"
+        android:icon="@drawable/ic_credit"
+        android:title="@string/nav_credits" />
+</menu>

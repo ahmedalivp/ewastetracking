@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base Application Material 3 Theme -->
+    <style name="Theme.EWasteTracking" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/primary_green_light</item>
+        <item name="colorOnPrimaryContainer">@color/primary_green_dark</item>
+
+        <item name="colorSecondary">@color/accent_mint</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/mint_light</item>
+        <item name="colorOnSecondaryContainer">@color/mint_dark</item>
+
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/bg_screen</item>
+
+        <item name="android:statusBarColor">@color/bg_screen</item>
+        <item name="android:navigationBarColor">@color/bg_card</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
+        <!-- Material Components Defaults -->
+        <item name="toolbarStyle">@style/Widget.EWasteTracking.Toolbar</item>
+    </style>
+
+    <!-- Modern Clean Surface Toolbar Style -->
+    <style name="Widget.EWasteTracking.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/bg_screen</item>
+        <item name="titleTextColor">@color/text_headline</item>
+        <item name="subtitleTextColor">@color/text_secondary</item>
+        <item name="navigationIconTint">@color/text_headline</item>
+    </style>
+
+    <!-- Splash Theme -->
+    <style name="Theme.EWasteTracking.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/primary_green</item>
+        <item name="android:statusBarColor">@color/primary_green_dark</item>
+    </style>
+</resources>

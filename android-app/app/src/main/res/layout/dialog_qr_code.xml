@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/bg_card">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digital E-Waste Passport"
+        android:textColor="@color/text_headline"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTrackingCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="EWASTE-001"
+        android:textColor="@color/primary_green"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.05" />
+
+    <!-- QR Code Container -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/white"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/card_stroke">
+
+        <ImageView
+            android:id="@+id/ivQrCode"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_margin="16dp"
+            android:contentDescription="E-Waste QR Passport" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvDeviceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Dell XPS 15 Laptop"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tvDropOffLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Drop-off: Downtown Public Drop Box A"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Show this QR code to facility technicians upon drop-off for instant intake triage &amp; credit redemption."
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:background="@drawable/bg_icon_chip"
+        android:padding="12dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:text="Done"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ewaste.app.AdminAndImpactDtoTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-09-21T19:13:09" hostname="ahmed" time="0.025">
+  <properties/>
+  <testcase name="testFacilityResponseDeserialization" classname="com.ewaste.app.AdminAndImpactDtoTest" time="0.019"/>
+  <testcase name="testQrPassportTokenFormattingAndParsing" classname="com.ewaste.app.AdminAndImpactDtoTest" time="0.0"/>
+  <testcase name="testCachedEntitiesMapping" classname="com.ewaste.app.AdminAndImpactDtoTest" time="0.0"/>
+  <testcase name="testImpactStatsResponseDeserialization" classname="com.ewaste.app.AdminAndImpactDtoTest" time="0.003"/>
+  <testcase name="testVerifyFacilityRequestSerialization" classname="com.ewaste.app.AdminAndImpactDtoTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

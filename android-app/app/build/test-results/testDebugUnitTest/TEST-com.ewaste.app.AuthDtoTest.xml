@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ewaste.app.AuthDtoTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-09-21T19:13:09" hostname="ahmed" time="0.004">
+  <properties/>
+  <testcase name="testAuthResponseDeserialization" classname="com.ewaste.app.AuthDtoTest" time="0.002"/>
+  <testcase name="testRegisterRequestSerialization" classname="com.ewaste.app.AuthDtoTest" time="0.002"/>
+  <testcase name="testLoginRequestSerialization" classname="com.ewaste.app.AuthDtoTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

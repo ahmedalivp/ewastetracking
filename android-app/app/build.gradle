@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.ewaste.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ewaste.app"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // 10.0.2.2 maps to the host computer's localhost from inside an Android emulator.
+        // If testing on a physical Android phone over Wi-Fi, change this to your computer's LAN IP, e.g.:
+        // "http://192.168.1.50:8080/api/"
+        buildConfigField "String", "BASE_URL", "\"http://10.0.2.2:8080/api/\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"http://10.0.2.2:8080/api/\""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+}
+
+dependencies {
+    // AndroidX UI & Material 3
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Architecture Components: Lifecycle, ViewModel, LiveData
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.8.2'
+
+    // Navigation Component
+    implementation 'androidx.navigation:navigation-fragment:2.7.7'
+    implementation 'androidx.navigation:navigation-ui:2.7.7'
+
+    // Networking: Retrofit 2 + Gson + OkHttp3
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // QR Code Generation & Scanning (ZXing)
+    implementation 'com.google.zxing:core:3.5.3'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    // Room Database (Offline Caching)
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // Unit Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+}

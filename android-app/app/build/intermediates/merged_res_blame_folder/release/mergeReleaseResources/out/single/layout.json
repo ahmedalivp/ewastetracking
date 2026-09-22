@@ -1,0 +1,134 @@
+[
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_splash.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_component_request.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_component_request.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_submission.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_submission.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_facility_item_detail.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_facility_item_detail.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_facility_main.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_facility_main.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_credits.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_credits.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_inventory.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_inventory.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_admin_facility.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_admin_facility.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_categorize.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_categorize.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_qr_code.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_qr_code.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_flag_hazardous.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_flag_hazardous.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_submit_ewaste.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_submit_ewaste.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_browse_components.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_browse_components.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_register.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_drop_off_points.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_drop_off_points.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_request_component.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_request_component.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_intake_queue.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_intake_queue.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_credit.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_credit.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_redeem_credit.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_redeem_credit.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_marketplace_component.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_marketplace_component.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_login.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_business_main.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_business_main.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_inventory_component.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_inventory_component.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_my_submissions.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_my_submissions.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_consumer_main.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_consumer_main.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_tracking_record.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_tracking_record.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/item_drop_off_point.xml",
+        "source": "com.ewaste.app-main-49:/layout/item_drop_off_point.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_item_detail.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_item_detail.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_intake_queue.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_intake_queue.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/fragment_my_requests.xml",
+        "source": "com.ewaste.app-main-49:/layout/fragment_my_requests.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_map_preview.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_map_preview.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/dialog_harvest_component.xml",
+        "source": "com.ewaste.app-main-49:/layout/dialog_harvest_component.xml"
+    },
+    {
+        "merged": "com.ewaste.app-mergeReleaseResources-47:/layout/activity_admin_main.xml",
+        "source": "com.ewaste.app-main-49:/layout/activity_admin_main.xml"
+    }
+]

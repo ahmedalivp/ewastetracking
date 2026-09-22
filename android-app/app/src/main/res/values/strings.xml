@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">E-Waste Tracker</string>
+    <string name="app_tagline">Track, Recycle &amp; Salvage for a Circular Future</string>
+
+    <!-- Auth -->
+    <string name="login">Sign In</string>
+    <string name="register">Create Account</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="select_role">Select Account Role</string>
+    <string name="facility_name">Assigned Facility</string>
+    <string name="business_name">Business Legal Name</string>
+    <string name="business_type">Business Type (e.g. Refurbisher)</string>
+    <string name="logout">Logout</string>
+
+    <!-- Roles -->
+    <string name="role_consumer">Consumer</string>
+    <string name="role_facility_staff">Facility Staff</string>
+    <string name="role_business">Business Enterprise</string>
+
+    <!-- Consumer Navigation -->
+    <string name="nav_drop_off">Drop-Off Points</string>
+    <string name="nav_submit">Submit Item</string>
+    <string name="nav_my_items">My Submissions</string>
+    <string name="nav_credits">Credits</string>
+
+    <!-- Facility Navigation -->
+    <string name="nav_intake">Intake Queue</string>
+    <string name="nav_inventory">Inventory</string>
+
+    <!-- Business Navigation -->
+    <string name="nav_browse">Browse Components</string>
+    <string name="nav_requests">My Requests</string>
+</resources>

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ewaste-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ewastedb
+      POSTGRES_USER: ewaste_user
+      POSTGRES_PASSWORD: ewaste_secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ewaste_user -d ewastedb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: .
+    container_name: ewaste-backend
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ewastedb
+      SPRING_DATASOURCE_USERNAME: ewaste_user
+      SPRING_DATASOURCE_PASSWORD: ewaste_secure_password
+      APP_JWT_SECRET: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      PORT: 8080
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
