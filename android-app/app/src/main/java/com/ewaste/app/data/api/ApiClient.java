@@ -18,9 +18,9 @@ public class ApiClient {
     public static synchronized ApiService getApiService() {
         if (apiService == null) {
             OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder()
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .readTimeout(15, TimeUnit.SECONDS)
-                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .writeTimeout(60, TimeUnit.SECONDS)
                     .addInterceptor(new AuthInterceptor(EWasteApplication.getInstance().getSessionManager()));
 
             // Enable HTTP request/response logging only in debug builds
@@ -42,16 +42,7 @@ public class ApiClient {
     }
 
     public static String getBaseUrl() {
-        if (!BuildConfig.DEBUG) {
-            return BuildConfig.BASE_URL;
-        }
-
-        if (isEmulator()) {
-            return "http://10.0.2.2:8080/api/";
-        } else {
-            // Physical Android device connected via USB with "adb reverse tcp:8080 tcp:8080"
-            return "http://127.0.0.1:8080/api/";
-        }
+        return BuildConfig.BASE_URL;
     }
 
     private static boolean isEmulator() {
