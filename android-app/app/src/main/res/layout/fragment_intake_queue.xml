@@ -2,35 +2,123 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/bg_screen">
 
-    <!-- Emerald SaaS Header -->
+    <!-- Nordic Minimalist Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:paddingHorizontal="20dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="18dp"
+        android:paddingBottom="12dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Facility Intake Queue"
-            android:textColor="@color/text_headline"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intake Queue"
+                android:textColor="@color/text_headline"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Facility Operations &amp; Material Triage"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Unconventional Inverted Triangle Action Button (▼) -->
+        <ImageButton
+            android:id="@+id/btnTriangleMenu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_triangle_button"
+            android:src="@drawable/ic_triangle_action"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Quick Action Menu" />
+    </LinearLayout>
+
+    <!-- Search & Scanner Pill Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_search_pill"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/text_secondary"
+            android:contentDescription="Search" />
+
+        <EditText
+            android:id="@+id/etSearchQueue"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Triage, inspect, and salvage circular components"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:hint="Search device, passport ID, donor..."
+            android:textColorHint="@color/text_tertiary"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1" />
+
+        <ImageView
+            android:id="@+id/btnClearSearch"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_list"
+            app:tint="@color/text_tertiary"
+            android:visibility="gone"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Clear" />
+
+        <!-- Unconventional Scan QR Passport Button -->
+        <FrameLayout
+            android:id="@+id/btnScanPassport"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_triangle_button"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_qr_code"
+                app:tint="@color/primary_green"
+                android:contentDescription="Scan QR" />
+        </FrameLayout>
+
     </LinearLayout>
 
     <!-- Status Filter Chips -->
@@ -39,7 +127,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="6dp">
+        android:paddingBottom="8dp">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupFilter"
@@ -53,7 +141,7 @@
                 android:id="@+id/chipAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All"
+                android:text="All Items"
                 android:checked="true"
                 style="@style/Widget.Material3.Chip.Filter" />
 
@@ -88,6 +176,17 @@
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
+    <!-- Queue Metric Summary -->
+    <TextView
+        android:id="@+id/tvQueueSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="6dp"
+        android:textColor="@color/text_tertiary"
+        android:textSize="12sp"
+        tools:text="Showing 2 devices in triage" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -104,13 +203,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="32dp"
-        android:layout_marginTop="40dp"
+        android:padding="40dp"
+        android:layout_marginTop="32dp"
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:src="@drawable/ic_list"
             app:tint="@color/text_tertiary"
             android:contentDescription="Empty" />
@@ -118,55 +217,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="Queue is clear"
             android:textColor="@color/text_headline"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Pending consumer submissions will appear here."
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="No e-waste items found matching current filters."
             android:textColor="@color/text_secondary"
             android:textSize="13sp" />
     </LinearLayout>
 
-    <FrameLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIntakeQueue"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="96dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvIntakeQueue"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingVertical="4dp" />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabScanQr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="20dp"
-            android:text="Scan QR Passport"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/primary_green"
-            app:icon="@drawable/ic_qr_code"
-            app:iconTint="@color/white"
-            app:elevation="4dp" />
-
-    </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

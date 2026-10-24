@@ -61,6 +61,9 @@ public class FacilityMainActivity extends AppCompatActivity {
             } else if (itemId == R.id.nav_inventory) {
                 loadFragment(new InventoryFragment(), false);
                 return true;
+            } else if (itemId == R.id.nav_requisitions) {
+                loadFragment(new FacilityRequisitionsFragment(), false);
+                return true;
             }
             return false;
         });

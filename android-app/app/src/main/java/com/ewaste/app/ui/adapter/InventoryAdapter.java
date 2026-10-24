@@ -16,6 +16,21 @@ public class InventoryAdapter extends ListAdapter<ComponentResponse, InventoryAd
         super(DIFF_CALLBACK);
     }
 
+    @Override
+    public void submitList(@androidx.annotation.Nullable java.util.List<ComponentResponse> list) {
+        if (list == null) {
+            super.submitList(null);
+            return;
+        }
+        java.util.LinkedHashMap<Long, ComponentResponse> uniqueMap = new java.util.LinkedHashMap<>();
+        for (ComponentResponse comp : list) {
+            if (comp.getId() != null) {
+                uniqueMap.putIfAbsent(comp.getId(), comp);
+            }
+        }
+        super.submitList(new java.util.ArrayList<>(uniqueMap.values()));
+    }
+
     private static final DiffUtil.ItemCallback<ComponentResponse> DIFF_CALLBACK = new DiffUtil.ItemCallback<ComponentResponse>() {
         @Override
         public boolean areItemsTheSame(@NonNull ComponentResponse oldItem, @NonNull ComponentResponse newItem) {

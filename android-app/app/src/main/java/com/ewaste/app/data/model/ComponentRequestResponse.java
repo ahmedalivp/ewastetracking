@@ -31,6 +31,18 @@ public class ComponentRequestResponse implements Serializable {
     @SerializedName("requestedAt")
     private String requestedAt;
 
+    @SerializedName("originalItemId")
+    private Long originalItemId;
+
+    @SerializedName("originalItemDescription")
+    private String originalItemDescription;
+
+    @SerializedName("categoryName")
+    private String categoryName;
+
+    @SerializedName("facilityName")
+    private String facilityName;
+
     public Long getId() { return id; }
     public Long getBusinessId() { return businessId; }
     public String getBusinessName() { return businessName; }
@@ -40,4 +52,8 @@ public class ComponentRequestResponse implements Serializable {
     public String getComponentCondition() { return componentCondition; }
     public String getStatus() { return status; }
     public String getRequestedAt() { return requestedAt; }
+    public Long getOriginalItemId() { return originalItemId; }
+    public String getOriginalItemDescription() { return originalItemDescription; }
+    public String getCategoryName() { return categoryName; }
+    public String getFacilityName() { return facilityName; }
 }

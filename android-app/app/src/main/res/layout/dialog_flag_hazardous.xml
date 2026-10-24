@@ -5,31 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:background="@drawable/bg_sheet_top_rounded"
+    android:padding="22dp">
 
+    <!-- Top Grab Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/bg_status_pill"
+        android:backgroundTint="@color/divider_color" />
+
+    <!-- Title & Subtitle -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="☣️ Flag Hazardous Substance"
+        android:text="Flag Hazardous Substance"
         android:textColor="@color/status_hazardous"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Record toxic substance presence for regulatory environmental safety"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="18dp"
+        android:text="Record presence of regulated toxic materials (e.g. mercury lamps, leaded glass, batteries) for environmental safety diversion."
         android:textColor="@color/text_secondary"
-        android:textSize="13sp"
-        android:layout_marginBottom="16dp" />
+        android:textSize="13sp" />
 
+    <!-- Substance Type Selector -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilMaterialType"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Substance / Material Type"
+        android:hint="Hazardous Substance Type"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
         android:layout_marginBottom="14dp">
 
         <AutoCompleteTextView
@@ -39,13 +55,18 @@
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Handling Instructions -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilInstructions"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Handling &amp; Storage Instructions"
-        android:layout_marginBottom="20dp">
+        android:hint="Safe Handling &amp; Storage Instructions"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        android:layout_marginBottom="24dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etInstructions"
@@ -56,28 +77,37 @@
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Action Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="center_vertical">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancel"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
             android:text="Cancel"
             android:textColor="@color/text_secondary"
-            android:layout_marginEnd="8dp" />
+            app:strokeColor="@color/card_stroke"
+            app:cornerRadius="14dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfirmFlag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.6"
+            android:layout_marginStart="6dp"
             android:text="Flag Hazardous"
             android:backgroundTint="@color/status_hazardous"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:cornerRadius="14dp" />
     </LinearLayout>
 
 </LinearLayout>

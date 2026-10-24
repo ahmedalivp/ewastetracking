@@ -1,6 +1,8 @@
 package com.ewaste.app.ui.facility;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +22,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IntakeQueueFragment extends Fragment {
 
     private FragmentIntakeQueueBinding binding;
     private FacilityViewModel viewModel;
     private FacilityQueueAdapter adapter;
     private String currentStatusFilter = null; // null = All
+    private final List<EWasteItemResponse> fullQueueList = new ArrayList<>();
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(
             new ScanContract(),
@@ -50,13 +56,18 @@ public class IntakeQueueFragment extends Fragment {
 
         setupRecyclerView();
         setupFilterChips();
+        setupSearchBar();
         setupSwipeRefresh();
         setupScanner();
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            com.ewaste.app.ui.consumer.QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         loadQueue();
     }
 
     private void setupScanner() {
-        binding.fabScanQr.setOnClickListener(v -> {
+        binding.btnScanPassport.setOnClickListener(v -> {
             ScanOptions options = new ScanOptions();
             options.setPrompt("Scan E-Waste Digital Passport");
             options.setBeepEnabled(true);
@@ -65,10 +76,51 @@ public class IntakeQueueFragment extends Fragment {
             barcodeLauncher.launch(options);
         });
 
-        binding.fabScanQr.setOnLongClickListener(v -> {
+        binding.btnScanPassport.setOnLongClickListener(v -> {
             showManualIdInputDialog();
             return true;
         });
+    }
+
+    private void setupSearchBar() {
+        binding.etSearchQueue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = s != null ? s.toString().trim() : "";
+                binding.btnClearSearch.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE);
+                filterQueue(query);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        binding.btnClearSearch.setOnClickListener(v -> binding.etSearchQueue.setText(""));
+    }
+
+    private void filterQueue(String query) {
+        if (query.isEmpty()) {
+            displayItems(fullQueueList);
+            return;
+        }
+
+        String lowerQuery = query.toLowerCase();
+        List<EWasteItemResponse> filtered = new ArrayList<>();
+        for (EWasteItemResponse item : fullQueueList) {
+            boolean matchDesc = item.getDeviceDescription() != null && item.getDeviceDescription().toLowerCase().contains(lowerQuery);
+            boolean matchCat = item.getCategoryName() != null && item.getCategoryName().toLowerCase().contains(lowerQuery);
+            boolean matchConsumer = item.getConsumerName() != null && item.getConsumerName().toLowerCase().contains(lowerQuery);
+            boolean matchId = item.getId() != null && String.valueOf(item.getId()).contains(lowerQuery);
+            boolean matchDropOff = item.getDropOffPointLabel() != null && item.getDropOffPointLabel().toLowerCase().contains(lowerQuery);
+
+            if (matchDesc || matchCat || matchConsumer || matchId || matchDropOff) {
+                filtered.add(item);
+            }
+        }
+        displayItems(filtered);
     }
 
     private void showManualIdInputDialog() {
@@ -94,7 +146,7 @@ public class IntakeQueueFragment extends Fragment {
 
         if (parsedId != null) {
             EWasteItemResponse match = null;
-            for (EWasteItemResponse item : adapter.getCurrentList()) {
+            for (EWasteItemResponse item : fullQueueList) {
                 if (item.getId() != null && item.getId().equals(parsedId)) {
                     match = item;
                     break;
@@ -103,7 +155,7 @@ public class IntakeQueueFragment extends Fragment {
             if (match != null) {
                 onItemClicked(match);
             } else {
-                Snackbar.make(binding.getRoot(), "Found Passport ID " + parsedId + " (Switch filter to All to view)", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.getRoot(), "Found Passport ID #" + parsedId + " (Clear filter to view)", Snackbar.LENGTH_LONG).show();
             }
         } else {
             Snackbar.make(binding.getRoot(), "Scanned code: " + clean, Snackbar.LENGTH_LONG).show();
@@ -151,20 +203,33 @@ public class IntakeQueueFragment extends Fragment {
                 }
             } else if (resource.status == Resource.Status.SUCCESS) {
                 binding.progressBar.setVisibility(View.GONE);
-                if (resource.data != null && !resource.data.isEmpty()) {
-                    binding.layoutEmpty.setVisibility(View.GONE);
-                    binding.rvIntakeQueue.setVisibility(View.VISIBLE);
-                    adapter.submitList(resource.data);
-                } else {
-                    binding.layoutEmpty.setVisibility(View.VISIBLE);
-                    binding.rvIntakeQueue.setVisibility(View.GONE);
+                fullQueueList.clear();
+                if (resource.data != null) {
+                    fullQueueList.addAll(resource.data);
                 }
+
+                String currentQuery = binding.etSearchQueue.getText() != null ? binding.etSearchQueue.getText().toString().trim() : "";
+                filterQueue(currentQuery);
             } else if (resource.status == Resource.Status.ERROR) {
                 binding.progressBar.setVisibility(View.GONE);
                 String msg = resource.message != null ? resource.message : "Failed to load intake queue";
                 Snackbar.make(binding.getRoot(), msg, Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void displayItems(List<EWasteItemResponse> items) {
+        if (items != null && !items.isEmpty()) {
+            binding.layoutEmpty.setVisibility(View.GONE);
+            binding.rvIntakeQueue.setVisibility(View.VISIBLE);
+            adapter.submitList(new ArrayList<>(items));
+            binding.tvQueueSummary.setText(String.format("Showing %d %s ready for triage", items.size(), items.size() == 1 ? "device" : "devices"));
+        } else {
+            binding.layoutEmpty.setVisibility(View.VISIBLE);
+            binding.rvIntakeQueue.setVisibility(View.GONE);
+            adapter.submitList(new ArrayList<>());
+            binding.tvQueueSummary.setText("No devices found");
+        }
     }
 
     private void onItemClicked(EWasteItemResponse item) {

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_sheet_top_rounded"
+    android:padding="20dp">
+
+    <!-- Top Grab Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_status_pill"
+        android:backgroundTint="@color/divider_color" />
+
+    <!-- Hub Header: Photo & Title -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/card_stroke">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivSheetHubPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_hub_placeholder"
+                android:contentDescription="Hub Photo" />
+
+            <TextView
+                android:id="@+id/tvSheetOpenStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:layout_gravity="top|start"
+                android:text="Open Now"
+                android:textColor="#065F46"
+                android:background="@drawable/bg_status_pill"
+                android:backgroundTint="#D1FAE5"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvSheetHubName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_headline"
+        tools:text="Downtown Public Drop Box A" />
+
+    <TextView
+        android:id="@+id/tvSheetFacility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="13sp"
+        android:textColor="@color/text_secondary"
+        tools:text="Managed by GreenTech Recycling Center" />
+
+    <!-- Info Row: Address & Hours -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_status_pill"
+        android:backgroundTint="@color/bg_surface_variant"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvSheetAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:drawableStart="@drawable/ic_navigation"
+            android:drawablePadding="8dp"
+            app:drawableTint="@color/primary_green"
+            tools:text="100 Market St, San Francisco, CA" />
+
+        <TextView
+            android:id="@+id/tvSheetHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:drawableStart="@drawable/ic_clock"
+            android:drawablePadding="8dp"
+            app:drawableTint="@color/secondary_amber"
+            tools:text="24/7 Smart Automated Drop Box" />
+    </LinearLayout>
+
+    <!-- Accepted Items Info -->
+    <TextView
+        android:id="@+id/tvSheetAccepted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="11sp"
+        android:textColor="@color/text_tertiary"
+        tools:text="Accepts: Smartphones, Tablets, Batteries, Chargers" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="18dp"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSheetDirections"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:text="Directions"
+            app:icon="@drawable/ic_navigation"
+            app:iconTint="@color/primary_green"
+            app:strokeColor="@color/primary_green"
+            android:textColor="@color/primary_green"
+            app:cornerRadius="14dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSheetDropOff"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1.2"
+            android:layout_marginStart="6dp"
+            android:text="Drop Off Here"
+            app:icon="@drawable/ic_arrow_forward"
+            app:iconGravity="textEnd"
+            android:backgroundTint="@color/primary_green"
+            android:textColor="@color/white"
+            app:cornerRadius="14dp" />
+    </LinearLayout>
+
+</LinearLayout>

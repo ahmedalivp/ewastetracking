@@ -13,32 +13,165 @@
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingTop="16dp"
-        android:paddingBottom="32dp">
+        android:paddingBottom="100dp">
 
-        <!-- Emerald SaaS Header -->
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit E-Waste"
-            android:textColor="@color/text_headline"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submit E-Waste"
+                    android:textColor="@color/text_headline"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Recycle old electronics and earn green incentive credits"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Unconventional Inverted Triangle Action Button (▼) -->
+            <ImageButton
+                android:id="@+id/btnTriangleMenu"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_triangle_button"
+                android:src="@drawable/ic_triangle_action"
+                android:scaleType="centerInside"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Quick Action Menu" />
+        </LinearLayout>
+
+        <!-- Selected Drop-Off Hub Card (Shows when hub is pre-selected from Map / Drop Off Here) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSelectedHub"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Recycle old electronics and earn green incentive credits"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/bg_card"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/card_stroke"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp">
+
+                    <ImageView
+                        android:id="@+id/ivSelectedHubPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_hub_placeholder"
+                        android:contentDescription="Selected Hub Photo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|start"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:backgroundTint="#DD0D5C3A"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="📍 Designated Drop-Off Hub"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tvSelectedHubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Downtown Public Drop Box A"
+                        android:textColor="@color/text_headline"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSelectedHubFacility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="GreenTech Recycling Center"
+                        android:textColor="@color/primary_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSelectedHubAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="100 Market St, San Francisco, CA"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvSelectedHubHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Hours: 24/7 Smart Automated Drop Box"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="11sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnChangeHub"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="4dp"
+                        android:text="Change Location ›"
+                        android:textColor="@color/primary_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="4dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Form Card Container -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="1dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
             app:cardBackgroundColor="@color/bg_card"
             app:strokeWidth="1dp"
             app:strokeColor="@color/card_stroke">
@@ -71,28 +204,52 @@
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Drop-Off Location Selector -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilDropOffPoint"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <!-- Drop-Off Location Selector (Dropdown fallback if no hub pre-selected) -->
+                <LinearLayout
+                    android:id="@+id/layoutDropOffSelector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Drop-Off Location *"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxStrokeColor="@color/primary_green">
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/actvDropOffPoint"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilDropOffPoint"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:hint="Drop-Off Location *"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxStrokeColor="@color/primary_green">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvDropOffPoint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBrowseMap"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="34dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="2dp"
+                        android:text="Browse Hubs on Map ›"
+                        android:textColor="@color/primary_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:icon="@drawable/ic_drop_off"
+                        app:iconTint="@color/primary_green"
+                        app:iconSize="14dp"
+                        app:iconPadding="4dp"
+                        android:paddingHorizontal="4dp" />
+                </LinearLayout>
 
                 <!-- Device Description -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -100,7 +257,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:hint="Description (Brand, Model, Condition) *"
                     app:boxCornerRadiusTopStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -126,18 +283,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:layout_marginTop="20dp"
-                    android:text="Submit for Recycling"
-                    android:textColor="@color/white"
+                    android:text="Submit for Circular Recycling"
+                    android:textColor="@color/bg_screen"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:backgroundTint="@color/primary_green"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    app:cornerRadius="12dp"
+                    app:cornerRadius="14dp"
                     app:icon="@drawable/ic_submit"
                     app:iconGravity="textStart"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/bg_screen" />
 
                 <!-- Progress Bar -->
                 <ProgressBar
@@ -157,7 +314,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/bg_card"
             app:strokeWidth="1dp"
@@ -197,7 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="1. Submit device details online.\n2. Drop off at any certified collection point.\n3. Technicians triage and salvage circular components.\n4. Green incentive credits are automatically awarded."
+                    android:text="1. Submit device details online.\n2. Drop off at your designated station with QR passport.\n3. Technicians triage and salvage circular components.\n4. Green incentive credits are automatically awarded."
                     android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:lineSpacingExtra="4dp" />

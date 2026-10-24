@@ -12,8 +12,19 @@ import com.ewaste.app.ui.common.StatusPillHelper;
 
 public class ComponentRequestsAdapter extends ListAdapter<ComponentRequestResponse, ComponentRequestsAdapter.ViewHolder> {
 
-    public ComponentRequestsAdapter() {
+    public interface OnItemClickListener {
+        void onItemClick(ComponentRequestResponse item);
+    }
+
+    private final OnItemClickListener listener;
+
+    public ComponentRequestsAdapter(OnItemClickListener listener) {
         super(DIFF_CALLBACK);
+        this.listener = listener;
+    }
+
+    public ComponentRequestsAdapter() {
+        this(null);
     }
 
     private static final DiffUtil.ItemCallback<ComponentRequestResponse> DIFF_CALLBACK = new DiffUtil.ItemCallback<ComponentRequestResponse>() {
@@ -42,7 +53,13 @@ public class ComponentRequestsAdapter extends ListAdapter<ComponentRequestRespon
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        ComponentRequestResponse item = getItem(position);
+        holder.bind(item);
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(item);
+            }
+        });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

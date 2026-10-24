@@ -13,6 +13,7 @@ public class EWasteApplication extends Application {
         super.onCreate();
         instance = this;
         sessionManager = new SessionManager(this);
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(sessionManager.getThemeMode());
     }
 
     public static EWasteApplication getInstance() {

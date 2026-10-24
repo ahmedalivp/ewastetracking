@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_screen">
@@ -15,51 +16,84 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="96dp">
 
-            <!-- Back navigation header -->
+            <!-- Top Header & Back Navigation -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="16dp">
 
                 <ImageView
                     android:id="@+id/btnBack"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_list"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:tint="@color/primary_green"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:rotation="180"
+                    android:background="@drawable/bg_circle_dot"
+                    android:backgroundTint="@color/bg_surface_variant"
+                    app:tint="@color/text_primary"
                     android:contentDescription="Back" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Facility Triage &amp; Processing"
-                    android:textColor="@color/text_primary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Device Inspection"
+                        android:textColor="@color/text_headline"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Triage, Salvage &amp; Safety Verification"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Unconventional Inverted Triangle Action Button (▼) -->
+                <ImageButton
+                    android:id="@+id/btnTriangleMenu"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_triangle_button"
+                    android:src="@drawable/ic_triangle_action"
+                    android:scaleType="centerInside"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Quick Action Menu" />
             </LinearLayout>
 
-            <!-- Device Summary Card -->
+            <!-- Hero Device Passport Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/bg_card"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/divider_color">
+                app:strokeColor="@color/card_stroke">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
+                    <!-- Header Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,15 +101,31 @@
                         android:gravity="center_vertical">
 
                         <TextView
+                            android:id="@+id/tvPassportTag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PASSPORT #01"
+                            android:textColor="@color/primary_green"
+                            android:background="@drawable/bg_status_pill"
+                            android:backgroundTint="@color/primary_green_light"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.04" />
+
+                        <TextView
                             android:id="@+id/tvCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:text="Category"
-                            android:textColor="@color/primary_green_dark"
-                            android:background="@color/primary_green_light"
+                            android:textColor="@color/text_primary"
+                            android:background="@drawable/bg_status_pill"
+                            android:backgroundTint="@color/bg_surface_variant"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
-                            android:textSize="12sp"
+                            android:textSize="11sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -86,48 +136,55 @@
                             android:layout_marginStart="8dp"
                             android:text="by Submitter"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp" />
+                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
 
                         <TextView
                             android:id="@+id/tvStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="STATUS"
-                            android:textColor="@color/white"
-                            android:background="@color/primary_green"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="4dp"
-                            android:textSize="12sp"
+                            android:text="SUBMITTED"
+                            android:textColor="@color/status_submitted_text"
+                            android:background="@drawable/bg_status_pill"
+                            android:backgroundTint="@color/status_submitted_bg"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="5dp"
+                            android:textSize="11sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
+                    <!-- Device Description -->
                     <TextView
                         android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="14dp"
                         android:text="Device Description"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/text_headline"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:lineSpacingMultiplier="1.2" />
 
+                    <!-- Location info -->
                     <TextView
                         android:id="@+id/tvDropOffLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Drop-off Center"
+                        android:layout_marginTop="6dp"
+                        android:text="📍 Drop-off Center"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
-                    <!-- Counters -->
+                    <!-- Salvage Metrics Pills Strip -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="12dp"
-                        android:background="@color/bg_screen"
-                        android:padding="10dp">
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:backgroundTint="@color/bg_surface_variant"
+                        android:padding="12dp">
 
                         <TextView
                             android:id="@+id/tvComponentsCount"
@@ -135,7 +192,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="⚙️ Harvested: 0"
-                            android:textColor="@color/primary_green_dark"
+                            android:textColor="@color/primary_green"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -145,7 +202,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="☣️ Hazardous: 0"
-                            android:textColor="@color/secondary_orange"
+                            android:textColor="@color/status_hazardous"
                             android:textSize="13sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -153,78 +210,82 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Actions Panel Card -->
+            <!-- Actions Panel -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="10dp"
+                android:text="Processing Actions"
+                android:textColor="@color/text_headline"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/bg_card"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/divider_color">
+                app:strokeColor="@color/card_stroke">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="18dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Facility Operations"
-                        android:textColor="@color/text_primary"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="12dp" />
-
-                    <!-- Mark Received Action -->
+                    <!-- Receive Action Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnMarkReceived"
+                        style="@style/Widget.Material3.Button"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:text="📥 Mark as Received at Facility"
+                        android:layout_height="52dp"
+                        android:text="Mark Received at Facility"
                         android:backgroundTint="@color/status_received"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        app:cornerRadius="10dp"
+                        app:cornerRadius="14dp"
                         android:layout_marginBottom="10dp" />
 
-                    <!-- Categorize Action -->
+                    <!-- Categorize Action Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCategorize"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:text="🔍 Categorize / Triage Inspection"
-                        android:backgroundTint="@color/status_categorized"
-                        android:textColor="@color/white"
+                        android:layout_height="52dp"
+                        android:text="Triage &amp; Log Inspection"
+                        app:strokeColor="@color/primary_green"
+                        android:textColor="@color/primary_green"
                         android:textStyle="bold"
-                        app:cornerRadius="10dp"
+                        app:cornerRadius="14dp"
                         android:layout_marginBottom="10dp" />
 
-                    <!-- Harvest Component Action -->
+                    <!-- Harvest Component Action Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnHarvestComponent"
+                        style="@style/Widget.Material3.Button"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="52dp"
                         android:text="⚙️ Harvest Reusable Component"
                         android:backgroundTint="@color/primary_green"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        app:cornerRadius="10dp"
+                        app:cornerRadius="14dp"
                         android:layout_marginBottom="10dp" />
 
-                    <!-- Flag Hazardous Material Action -->
+                    <!-- Flag Hazardous Material Action Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnFlagHazardous"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:text="☣️ Flag Hazardous Material"
-                        android:backgroundTint="@color/status_hazardous"
-                        android:textColor="@color/white"
+                        android:layout_height="52dp"
+                        android:text="☣️ Flag Hazardous Substance"
+                        app:strokeColor="@color/status_hazardous"
+                        android:textColor="@color/status_hazardous"
                         android:textStyle="bold"
-                        app:cornerRadius="10dp" />
+                        app:cornerRadius="14dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -233,10 +294,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginBottom="10dp"
                 android:text="Lifecycle Tracking History"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/text_headline"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

@@ -1,6 +1,5 @@
 package com.ewaste.app.ui.facility;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import com.ewaste.app.R;
 import com.ewaste.app.data.model.CategoryResponse;
 import com.ewaste.app.data.model.EWasteItemResponse;
 import com.ewaste.app.databinding.DialogCategorizeBinding;
@@ -21,7 +18,8 @@ import com.ewaste.app.databinding.DialogHarvestComponentBinding;
 import com.ewaste.app.databinding.FragmentFacilityItemDetailBinding;
 import com.ewaste.app.ui.adapter.TrackingTimelineAdapter;
 import com.ewaste.app.ui.common.Resource;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.ewaste.app.ui.common.StatusPillHelper;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -65,10 +63,17 @@ public class FacilityItemDetailFragment extends Fragment {
         setupViews();
         setupTimelineRecyclerView();
         setupActionButtons();
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            com.ewaste.app.ui.consumer.QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         loadTrackingTimeline();
     }
 
     private void setupViews() {
+        if (binding.tvPassportTag != null) {
+            binding.tvPassportTag.setText(String.format("PASSPORT #%02d", item.getId() != null ? item.getId() : 0));
+        }
         binding.tvCategory.setText(item.getCategoryName() != null ? item.getCategoryName() : "E-Waste");
         binding.tvSubmitter.setText(item.getConsumerName() != null ? "by " + item.getConsumerName() : "by Consumer");
         binding.tvDescription.setText(item.getDeviceDescription() != null ? item.getDeviceDescription() : "Electronic Device");
@@ -76,7 +81,7 @@ public class FacilityItemDetailFragment extends Fragment {
 
         String status = item.getStatus() != null ? item.getStatus() : "SUBMITTED";
         binding.tvStatus.setText(status);
-        applyStatusColor(status);
+        StatusPillHelper.applyStatus(binding.tvStatus, status);
 
         binding.tvComponentsCount.setText(String.format("⚙️ Harvested: %d", item.getComponentCount()));
         binding.tvHazardousCount.setText(String.format("☣️ Hazardous: %d", item.getHazardousMaterialCount()));
@@ -93,29 +98,6 @@ public class FacilityItemDetailFragment extends Fragment {
                 getParentFragmentManager().popBackStack();
             }
         });
-    }
-
-    private void applyStatusColor(String status) {
-        int color;
-        switch (status) {
-            case "RECEIVED":
-                color = Color.parseColor("#7B1FA2");
-                break;
-            case "CATEGORIZED":
-                color = Color.parseColor("#0288D1");
-                break;
-            case "PROCESSED":
-                color = Color.parseColor("#F57C00");
-                break;
-            case "COMPLETED":
-                color = Color.parseColor("#388E3C");
-                break;
-            case "SUBMITTED":
-            default:
-                color = Color.parseColor("#1976D2");
-                break;
-        }
-        binding.tvStatus.setBackgroundColor(color);
     }
 
     private void setupTimelineRecyclerView() {
@@ -151,9 +133,8 @@ public class FacilityItemDetailFragment extends Fragment {
         if (getContext() == null) return;
 
         DialogCategorizeBinding dialogBinding = DialogCategorizeBinding.inflate(getLayoutInflater());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setView(dialogBinding.getRoot())
-                .create();
+        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+        dialog.setContentView(dialogBinding.getRoot());
 
         final List<CategoryResponse> categories = new ArrayList<>();
         final Long[] selectedCatId = new Long[]{item.getCategoryId()};
@@ -223,9 +204,8 @@ public class FacilityItemDetailFragment extends Fragment {
         if (getContext() == null) return;
 
         DialogHarvestComponentBinding dialogBinding = DialogHarvestComponentBinding.inflate(getLayoutInflater());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setView(dialogBinding.getRoot())
-                .create();
+        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+        dialog.setContentView(dialogBinding.getRoot());
 
         String[] conditions = new String[]{"GOOD", "FAIR", "POOR"};
         ArrayAdapter<String> condAdapter = new ArrayAdapter<>(
@@ -275,9 +255,8 @@ public class FacilityItemDetailFragment extends Fragment {
         if (getContext() == null) return;
 
         DialogFlagHazardousBinding dialogBinding = DialogFlagHazardousBinding.inflate(getLayoutInflater());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setView(dialogBinding.getRoot())
-                .create();
+        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+        dialog.setContentView(dialogBinding.getRoot());
 
         String[] materials = new String[]{"BATTERY", "MERCURY", "LEAD", "CADMIUM", "OTHER"};
         ArrayAdapter<String> matAdapter = new ArrayAdapter<>(
@@ -321,9 +300,9 @@ public class FacilityItemDetailFragment extends Fragment {
     private void refreshItem() {
         viewModel.getIntakeQueue(null).observe(getViewLifecycleOwner(), resource -> {
             if (resource != null && resource.status == Resource.Status.SUCCESS && resource.data != null) {
-                for (EWasteItemResponse it : resource.data) {
-                    if (it.getId().equals(item.getId())) {
-                        this.item = it;
+                for (EWasteItemResponse i : resource.data) {
+                    if (i.getId() != null && i.getId().equals(item.getId())) {
+                        this.item = i;
                         setupViews();
                         break;
                     }
@@ -333,13 +312,19 @@ public class FacilityItemDetailFragment extends Fragment {
     }
 
     private void loadTrackingTimeline() {
+        if (item == null || item.getId() == null) return;
+
         binding.progressBar.setVisibility(View.VISIBLE);
         viewModel.getItemTracking(item.getId()).observe(getViewLifecycleOwner(), resource -> {
             if (resource == null) return;
 
-            binding.progressBar.setVisibility(View.GONE);
-            if (resource.status == Resource.Status.SUCCESS && resource.data != null) {
-                timelineAdapter.submitList(resource.data);
+            if (resource.status == Resource.Status.SUCCESS) {
+                binding.progressBar.setVisibility(View.GONE);
+                if (resource.data != null) {
+                    timelineAdapter.submitList(resource.data);
+                }
+            } else if (resource.status == Resource.Status.ERROR) {
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

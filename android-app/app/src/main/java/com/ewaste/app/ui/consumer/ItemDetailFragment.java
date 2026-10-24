@@ -14,6 +14,7 @@ import com.ewaste.app.data.model.EWasteItemResponse;
 import com.ewaste.app.databinding.FragmentItemDetailBinding;
 import com.ewaste.app.ui.adapter.TrackingTimelineAdapter;
 import com.ewaste.app.ui.common.Resource;
+import com.ewaste.app.ui.common.StatusPillHelper;
 
 public class ItemDetailFragment extends Fragment {
 
@@ -56,6 +57,9 @@ public class ItemDetailFragment extends Fragment {
     }
 
     private void setupViews() {
+        if (binding.tvPassportTag != null) {
+            binding.tvPassportTag.setText(String.format("PASSPORT #%02d", item.getId() != null ? item.getId() : 0));
+        }
         binding.tvCategory.setText(item.getCategoryName() != null ? item.getCategoryName() : "E-Waste");
         binding.tvDescription.setText(item.getDeviceDescription() != null ? item.getDeviceDescription() : "Electronic Device");
         binding.tvDropOff.setText(item.getDropOffPointLabel() != null ? "📍 Drop-off: " + item.getDropOffPointLabel() : "📍 Drop-off Point");
@@ -68,10 +72,15 @@ public class ItemDetailFragment extends Fragment {
 
         String status = item.getStatus() != null ? item.getStatus() : "SUBMITTED";
         binding.tvStatus.setText(status);
-        applyStatusColor(status);
+        StatusPillHelper.applyStatus(binding.tvStatus, status);
 
         binding.tvComponentsCount.setText(String.format("⚙️ Harvested: %d", item.getComponentCount()));
         binding.tvHazardousCount.setText(String.format("☣️ Hazardous: %d", item.getHazardousMaterialCount()));
+
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
 
         binding.btnBack.setOnClickListener(v -> {
             if (getParentFragmentManager().getBackStackEntryCount() > 0) {

@@ -16,6 +16,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", "\"https://ewastetracking.onrender.com/api/\""
+
+        manifestPlaceholders = [
+            MAPS_API_KEY: (project.findProperty("MAPS_API_KEY") ?: "")
+        ]
     }
 
     signingConfigs {
@@ -84,6 +88,14 @@ dependencies {
     // Room Database (Offline Caching)
     implementation 'androidx.room:room-runtime:2.6.1'
     annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // Image Loading & Caching (Glide)
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
+    // Google Play Services Maps & Location
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.android.gms:play-services-location:21.2.0'
 
     // Unit Testing
     testImplementation 'junit:junit:4.13.2'

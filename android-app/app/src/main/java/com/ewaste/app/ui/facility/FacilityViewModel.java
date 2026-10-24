@@ -60,4 +60,12 @@ public class FacilityViewModel extends AndroidViewModel {
     public LiveData<Resource<List<TrackingRecordResponse>>> getItemTracking(Long itemId) {
         return consumerRepository.getItemTracking(itemId);
     }
+
+    public LiveData<Resource<List<ComponentRequestResponse>>> getComponentRequests() {
+        return facilityRepository.getComponentRequests();
+    }
+
+    public LiveData<Resource<ComponentRequestResponse>> updateComponentRequestStatus(Long requestId, String status) {
+        return facilityRepository.updateComponentRequestStatus(requestId, status);
+    }
 }

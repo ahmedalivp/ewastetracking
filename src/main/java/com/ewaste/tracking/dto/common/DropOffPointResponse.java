@@ -8,6 +8,11 @@ public class DropOffPointResponse {
     private Double lng;
     private Long facilityId;
     private String facilityName;
+    private String address;
+    private String imageUrl;
+    private String operatingHours;
+    private String contactPhone;
+    private String acceptedTypes;
 
     public DropOffPointResponse() {}
 
@@ -18,6 +23,21 @@ public class DropOffPointResponse {
         this.lng = lng;
         this.facilityId = facilityId;
         this.facilityName = facilityName;
+    }
+
+    public DropOffPointResponse(Long id, String label, Double lat, Double lng, Long facilityId, String facilityName,
+                                String address, String imageUrl, String operatingHours, String contactPhone, String acceptedTypes) {
+        this.id = id;
+        this.label = label;
+        this.lat = lat;
+        this.lng = lng;
+        this.facilityId = facilityId;
+        this.facilityName = facilityName;
+        this.address = address;
+        this.imageUrl = imageUrl;
+        this.operatingHours = operatingHours;
+        this.contactPhone = contactPhone;
+        this.acceptedTypes = acceptedTypes;
     }
 
     public Long getId() {
@@ -66,5 +86,45 @@ public class DropOffPointResponse {
 
     public void setFacilityName(String facilityName) {
         this.facilityName = facilityName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getOperatingHours() {
+        return operatingHours;
+    }
+
+    public void setOperatingHours(String operatingHours) {
+        this.operatingHours = operatingHours;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public String getAcceptedTypes() {
+        return acceptedTypes;
+    }
+
+    public void setAcceptedTypes(String acceptedTypes) {
+        this.acceptedTypes = acceptedTypes;
     }
 }

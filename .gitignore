@@ -33,3 +33,11 @@ target/
 ### OS Files ###
 .DS_Store
 Thumbs.db
+
+### Android Gradle ###
+android-app/.gradle/
+android-app/build/
+android-app/*/build/
+android-app/local.properties
+*.apk
+

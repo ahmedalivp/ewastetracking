@@ -39,8 +39,12 @@ public abstract class User {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     public User() {
         this.createdAt = LocalDateTime.now();
+        this.active = true;
     }
 
     public User(String fullName, String email, String passwordHash, Role role) {
@@ -106,5 +110,13 @@ public abstract class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

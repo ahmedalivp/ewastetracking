@@ -36,6 +36,10 @@ public class MySubmissionsFragment extends Fragment {
 
         setupRecyclerView();
         setupSwipeRefresh();
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         loadSubmissions();
     }
 

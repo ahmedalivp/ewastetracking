@@ -20,9 +20,24 @@
             android:padding="24dp"
             android:gravity="center_horizontal">
 
-            <Space
+            <!-- Top Bar with Inverted Triangle Action Button (▼) -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="24dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/btnTriangleMenu"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/bg_triangle_button"
+                    android:src="@drawable/ic_triangle_action"
+                    android:scaleType="centerInside"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Quick Action Menu" />
+            </FrameLayout>
 
             <!-- App Logo & Branding Header -->
             <FrameLayout
@@ -63,8 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="1dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/bg_card"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/card_stroke">
@@ -73,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="22dp">
+                    android:padding="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -91,10 +106,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
                         app:boxStrokeColor="@color/primary_green"
                         app:startIconDrawable="@drawable/ic_email"
                         app:startIconTint="@color/primary_green"
@@ -115,10 +130,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
                         app:boxStrokeColor="@color/primary_green"
                         app:startIconDrawable="@drawable/ic_lock"
                         app:startIconTint="@color/primary_green"
@@ -140,13 +155,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:text="@string/login"
+                        android:textColor="@color/bg_screen"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        app:cornerRadius="50dp"
+                        app:cornerRadius="14dp"
                         android:backgroundTint="@color/primary_green"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        app:elevation="2dp" />
+                        app:elevation="0dp" />
 
                     <!-- Loading Indicator -->
                     <ProgressBar
@@ -161,87 +177,374 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Quick Demo Credential Section for Evaluator / Testing -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Horizontal Scrollable Demo Accounts Section -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/primary_green_light"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/mint_light">
+                android:orientation="vertical"
+                android:layout_marginTop="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="⚡ 1-Tap Demo Accounts"
+                        android:textColor="@color/text_headline"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚡ 1-Tap Demo Credentials"
-                        android:textColor="@color/primary_green_dark"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="10dp" />
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none">
-
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chipGroupDemo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:singleLine="true">
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipAlice"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Alice (Consumer)"
-                                app:chipBackgroundColor="@color/white"
-                                app:chipStrokeColor="@color/card_stroke"
-                                app:chipStrokeWidth="1dp"
-                                app:chipCornerRadius="50dp" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipStaff"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Staff (Facility)"
-                                app:chipBackgroundColor="@color/white"
-                                app:chipStrokeColor="@color/card_stroke"
-                                app:chipStrokeWidth="1dp"
-                                app:chipCornerRadius="50dp" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipBusiness"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Sarah (Business)"
-                                app:chipBackgroundColor="@color/white"
-                                app:chipStrokeColor="@color/card_stroke"
-                                app:chipStrokeWidth="1dp"
-                                app:chipCornerRadius="50dp" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipAdmin"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Admin"
-                                app:chipBackgroundColor="@color/white"
-                                app:chipStrokeColor="@color/card_stroke"
-                                app:chipStrokeWidth="1dp"
-                                app:chipCornerRadius="50dp" />
-
-                        </com.google.android.material.chip.ChipGroup>
-                    </HorizontalScrollView>
+                        android:text="Swipe →"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="11sp" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+
+                <HorizontalScrollView
+                    android:id="@+id/hsvDemoAccounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:overScrollMode="never"
+                    android:clipToPadding="false"
+                    android:paddingBottom="4dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Card 1: Alice (Consumer) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardDemoConsumer"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/bg_card"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/card_stroke"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="CONSUMER"
+                                        android:textSize="10sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/status_completed_text"
+                                        android:background="@drawable/bg_status_pill"
+                                        android:backgroundTint="@color/status_completed_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="3dp" />
+
+                                    <View
+                                        android:layout_width="0dp"
+                                        android:layout_height="1dp"
+                                        android:layout_weight="1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="🌱 100 pts"
+                                        android:textSize="11sp"
+                                        android:textColor="@color/accent_mint"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Alice Green"
+                                    android:textColor="@color/text_headline"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="alice@example.com"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Household Donor • Item Submissions"
+                                    android:textColor="@color/text_tertiary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card 2: Staff (Facility) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardDemoStaff"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/bg_card"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/card_stroke"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="FACILITY STAFF"
+                                        android:textSize="10sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/status_categorized_text"
+                                        android:background="@drawable/bg_status_pill"
+                                        android:backgroundTint="@color/status_categorized_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="3dp" />
+
+                                    <View
+                                        android:layout_width="0dp"
+                                        android:layout_height="1dp"
+                                        android:layout_weight="1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="ID #4"
+                                        android:textSize="11sp"
+                                        android:textColor="@color/text_tertiary" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="John Tech"
+                                    android:textColor="@color/text_headline"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="staff@greentech.org"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="GreenTech Hub • Intake &amp; Salvage"
+                                    android:textColor="@color/text_tertiary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card 3: Sarah (Business Enterprise) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardDemoBusiness"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/bg_card"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/card_stroke"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="ENTERPRISE"
+                                        android:textSize="10sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/status_submitted_text"
+                                        android:background="@drawable/bg_status_pill"
+                                        android:backgroundTint="@color/status_submitted_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="3dp" />
+
+                                    <View
+                                        android:layout_width="0dp"
+                                        android:layout_height="1dp"
+                                        android:layout_weight="1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Verified"
+                                        android:textSize="11sp"
+                                        android:textColor="@color/status_submitted_text" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Sarah Refurb"
+                                    android:textColor="@color/text_headline"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="contact@circularelectronics.com"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="12sp"
+                                    android:singleLine="true"
+                                    android:ellipsize="end" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Circular Electronics • Salvaged Parts"
+                                    android:textColor="@color/text_tertiary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card 4: Admin (Governance) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardDemoAdmin"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/bg_card"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/card_stroke"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="GOVERNANCE"
+                                        android:textSize="10sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/status_completed_text"
+                                        android:background="@drawable/bg_status_pill"
+                                        android:backgroundTint="@color/status_completed_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="3dp" />
+
+                                    <View
+                                        android:layout_width="0dp"
+                                        android:layout_height="1dp"
+                                        android:layout_weight="1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="🛡️ Root"
+                                        android:textSize="11sp"
+                                        android:textColor="@color/accent_mint"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="System Admin"
+                                    android:textColor="@color/text_headline"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="admin@ewaste.org"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Platform Oversight • Hubs &amp; Access"
+                                    android:textColor="@color/text_tertiary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
 
             <!-- Sign Up Prompt -->
             <LinearLayout

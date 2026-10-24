@@ -8,8 +8,44 @@ public class FacilityResponse {
     private Double lat;
     private Double lng;
     private boolean verifiedByAdmin;
+    private boolean active = true;
+    private String contactPhone;
+    private int staffCount;
+    private int dropOffCount;
 
     public FacilityResponse() {}
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public int getStaffCount() {
+        return staffCount;
+    }
+
+    public void setStaffCount(int staffCount) {
+        this.staffCount = staffCount;
+    }
+
+    public int getDropOffCount() {
+        return dropOffCount;
+    }
+
+    public void setDropOffCount(int dropOffCount) {
+        this.dropOffCount = dropOffCount;
+    }
 
     public Long getId() {
         return id;

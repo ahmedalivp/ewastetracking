@@ -50,10 +50,10 @@ public class BusinessServiceImpl implements BusinessService {
     public List<ComponentResponse> getAvailableComponents(String categoryName) {
         List<Component> components;
         if (categoryName != null && !categoryName.trim().isEmpty()) {
-            components = componentRepository.findByEwasteItemCategoryNameIgnoreCaseAndStatus(
+            components = componentRepository.findDistinctByEwasteItemCategoryNameIgnoreCaseAndStatus(
                     categoryName.trim(), ComponentStatus.AVAILABLE);
         } else {
-            components = componentRepository.findByStatus(ComponentStatus.AVAILABLE);
+            components = componentRepository.findDistinctByStatus(ComponentStatus.AVAILABLE);
         }
 
         return components.stream()
@@ -121,16 +121,28 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     private ComponentRequestResponse mapToComponentRequestResponse(ComponentRequest req) {
+        Component c = req.getComponent();
+        Long originalItemId = (c != null && c.getEwasteItem() != null) ? c.getEwasteItem().getId() : null;
+        String originalItemDesc = (c != null && c.getEwasteItem() != null) ? c.getEwasteItem().getDeviceDescription() : null;
+        String catName = (c != null && c.getEwasteItem() != null && c.getEwasteItem().getCategory() != null)
+                ? c.getEwasteItem().getCategory().getName() : null;
+        String facName = (c != null && c.getEwasteItem() != null && c.getEwasteItem().getDropOffPoint() != null && c.getEwasteItem().getDropOffPoint().getFacility() != null)
+                ? c.getEwasteItem().getDropOffPoint().getFacility().getName() : null;
+
         return new ComponentRequestResponse(
                 req.getId(),
                 req.getBusiness().getId(),
                 req.getBusiness().getBusinessName(),
-                req.getComponent().getId(),
-                req.getComponent().getName(),
-                req.getComponent().getType(),
-                req.getComponent().getCondition(),
+                c != null ? c.getId() : null,
+                c != null ? c.getName() : null,
+                c != null ? c.getType() : null,
+                c != null ? c.getCondition() : null,
                 req.getStatus(),
-                req.getRequestedAt()
+                req.getRequestedAt(),
+                originalItemId,
+                originalItemDesc,
+                catName,
+                facName
         );
     }
 }

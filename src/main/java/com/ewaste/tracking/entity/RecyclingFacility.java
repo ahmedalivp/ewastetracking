@@ -31,8 +31,15 @@ public class RecyclingFacility {
     @Column(nullable = false)
     private boolean verifiedByAdmin;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
+    @Column
+    private String contactPhone;
+
     public RecyclingFacility() {
         this.verifiedByAdmin = false;
+        this.active = true;
     }
 
     public RecyclingFacility(String name, String address, Double lat, Double lng, boolean verifiedByAdmin) {
@@ -41,6 +48,17 @@ public class RecyclingFacility {
         this.lat = lat;
         this.lng = lng;
         this.verifiedByAdmin = verifiedByAdmin;
+        this.active = true;
+    }
+
+    public RecyclingFacility(String name, String address, Double lat, Double lng, boolean verifiedByAdmin, String contactPhone) {
+        this.name = name;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+        this.verifiedByAdmin = verifiedByAdmin;
+        this.active = true;
+        this.contactPhone = contactPhone;
     }
 
     public Long getId() {
@@ -89,5 +107,21 @@ public class RecyclingFacility {
 
     public void setVerifiedByAdmin(boolean verifiedByAdmin) {
         this.verifiedByAdmin = verifiedByAdmin;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 }

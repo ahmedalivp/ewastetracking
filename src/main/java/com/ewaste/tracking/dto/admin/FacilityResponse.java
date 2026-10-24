@@ -8,6 +8,10 @@ public class FacilityResponse {
     private Double lat;
     private Double lng;
     private boolean verifiedByAdmin;
+    private boolean active = true;
+    private String contactPhone;
+    private int staffCount;
+    private int dropOffCount;
 
     public FacilityResponse() {}
 
@@ -18,6 +22,21 @@ public class FacilityResponse {
         this.lat = lat;
         this.lng = lng;
         this.verifiedByAdmin = verifiedByAdmin;
+        this.active = true;
+    }
+
+    public FacilityResponse(Long id, String name, String address, Double lat, Double lng, boolean verifiedByAdmin,
+                            boolean active, String contactPhone, int staffCount, int dropOffCount) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+        this.verifiedByAdmin = verifiedByAdmin;
+        this.active = active;
+        this.contactPhone = contactPhone;
+        this.staffCount = staffCount;
+        this.dropOffCount = dropOffCount;
     }
 
     public Long getId() {
@@ -66,5 +85,37 @@ public class FacilityResponse {
 
     public void setVerifiedByAdmin(boolean verifiedByAdmin) {
         this.verifiedByAdmin = verifiedByAdmin;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public int getStaffCount() {
+        return staffCount;
+    }
+
+    public void setStaffCount(int staffCount) {
+        this.staffCount = staffCount;
+    }
+
+    public int getDropOffCount() {
+        return dropOffCount;
+    }
+
+    public void setDropOffCount(int dropOffCount) {
+        this.dropOffCount = dropOffCount;
     }
 }

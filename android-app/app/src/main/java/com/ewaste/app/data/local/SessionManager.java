@@ -65,7 +65,19 @@ public class SessionManager {
         prefs.edit().putString(KEY_DASHBOARD_SUMMARY, summary).apply();
     }
 
+    private static final String KEY_THEME_MODE = "theme_mode";
+
+    public int getThemeMode() {
+        return prefs.getInt(KEY_THEME_MODE, androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+    }
+
+    public void setThemeMode(int mode) {
+        prefs.edit().putInt(KEY_THEME_MODE, mode).apply();
+    }
+
     public void clearSession() {
+        int theme = getThemeMode();
         prefs.edit().clear().apply();
+        setThemeMode(theme);
     }
 }

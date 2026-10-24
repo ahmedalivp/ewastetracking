@@ -1,8 +1,9 @@
 package com.ewaste.app.data.model;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class DropOffPointResponse {
+public class DropOffPointResponse implements Serializable {
     @SerializedName("id")
     private Long id;
 
@@ -21,6 +22,21 @@ public class DropOffPointResponse {
     @SerializedName("facilityName")
     private String facilityName;
 
+    @SerializedName("address")
+    private String address;
+
+    @SerializedName("imageUrl")
+    private String imageUrl;
+
+    @SerializedName("operatingHours")
+    private String operatingHours;
+
+    @SerializedName("contactPhone")
+    private String contactPhone;
+
+    @SerializedName("acceptedTypes")
+    private String acceptedTypes;
+
     public DropOffPointResponse() {}
 
     public DropOffPointResponse(Long id, String label, Double lat, Double lng, Long facilityId, String facilityName) {
@@ -30,6 +46,21 @@ public class DropOffPointResponse {
         this.lng = lng;
         this.facilityId = facilityId;
         this.facilityName = facilityName;
+    }
+
+    public DropOffPointResponse(Long id, String label, Double lat, Double lng, Long facilityId, String facilityName,
+                                String address, String imageUrl, String operatingHours, String contactPhone, String acceptedTypes) {
+        this.id = id;
+        this.label = label;
+        this.lat = lat;
+        this.lng = lng;
+        this.facilityId = facilityId;
+        this.facilityName = facilityName;
+        this.address = address;
+        this.imageUrl = imageUrl;
+        this.operatingHours = operatingHours;
+        this.contactPhone = contactPhone;
+        this.acceptedTypes = acceptedTypes;
     }
 
     public Long getId() { return id; }
@@ -49,6 +80,21 @@ public class DropOffPointResponse {
 
     public String getFacilityName() { return facilityName; }
     public void setFacilityName(String facilityName) { this.facilityName = facilityName; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getOperatingHours() { return operatingHours; }
+    public void setOperatingHours(String operatingHours) { this.operatingHours = operatingHours; }
+
+    public String getContactPhone() { return contactPhone; }
+    public void setContactPhone(String contactPhone) { this.contactPhone = contactPhone; }
+
+    public String getAcceptedTypes() { return acceptedTypes; }
+    public void setAcceptedTypes(String acceptedTypes) { this.acceptedTypes = acceptedTypes; }
 
     @Override
     public String toString() {

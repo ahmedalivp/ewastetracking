@@ -132,10 +132,10 @@ public class FacilityServiceImpl implements FacilityService {
                 ComponentStatus.AVAILABLE
         );
 
-        // Composition: add component to item's list
-        item.addComponent(component);
-        ewasteItemRepository.save(item);
+        // Save component directly first to prevent duplicate cascade insertion
         Component savedComponent = componentRepository.save(component);
+        item.addComponent(savedComponent);
+        ewasteItemRepository.save(item);
 
         // Record tracking for the harvested component
         trackingService.recordTracking(
@@ -172,9 +172,10 @@ public class FacilityServiceImpl implements FacilityService {
         EWasteItem item = getItemById(itemId);
 
         HazardousMaterial material = new HazardousMaterial(item, request.getType(), DiversionStatus.FLAGGED);
-        item.addHazardousMaterial(material);
-        ewasteItemRepository.save(item);
+        // Save material directly first to prevent duplicate cascade insertion
         HazardousMaterial savedMaterial = hazardousMaterialRepository.save(material);
+        item.addHazardousMaterial(savedMaterial);
+        ewasteItemRepository.save(item);
 
         trackingService.recordTracking(
                 EntityType.EWASTE_ITEM,
@@ -300,17 +301,37 @@ public class FacilityServiceImpl implements FacilityService {
         );
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<ComponentRequestResponse> getAllComponentRequests() {
+        return componentRequestRepository.findAllByOrderByRequestedAtDesc().stream()
+                .map(this::mapToComponentRequestResponse)
+                .collect(Collectors.toList());
+    }
+
     private ComponentRequestResponse mapToComponentRequestResponse(ComponentRequest req) {
+        Component c = req.getComponent();
+        Long originalItemId = (c != null && c.getEwasteItem() != null) ? c.getEwasteItem().getId() : null;
+        String originalItemDesc = (c != null && c.getEwasteItem() != null) ? c.getEwasteItem().getDeviceDescription() : null;
+        String catName = (c != null && c.getEwasteItem() != null && c.getEwasteItem().getCategory() != null)
+                ? c.getEwasteItem().getCategory().getName() : null;
+        String facName = (c != null && c.getEwasteItem() != null && c.getEwasteItem().getDropOffPoint() != null && c.getEwasteItem().getDropOffPoint().getFacility() != null)
+                ? c.getEwasteItem().getDropOffPoint().getFacility().getName() : null;
+
         return new ComponentRequestResponse(
                 req.getId(),
                 req.getBusiness().getId(),
                 req.getBusiness().getBusinessName(),
-                req.getComponent().getId(),
-                req.getComponent().getName(),
-                req.getComponent().getType(),
-                req.getComponent().getCondition(),
+                c != null ? c.getId() : null,
+                c != null ? c.getName() : null,
+                c != null ? c.getType() : null,
+                c != null ? c.getCondition() : null,
                 req.getStatus(),
-                req.getRequestedAt()
+                req.getRequestedAt(),
+                originalItemId,
+                originalItemDesc,
+                catName,
+                facName
         );
     }
 }

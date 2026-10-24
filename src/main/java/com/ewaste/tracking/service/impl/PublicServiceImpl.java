@@ -94,6 +94,8 @@ public class PublicServiceImpl implements PublicService {
     private DropOffPointResponse mapDropOffPoint(DropOffPoint point) {
         Long facilityId = point.getFacility() != null ? point.getFacility().getId() : null;
         String facilityName = point.getFacility() != null ? point.getFacility().getName() : null;
+        String address = point.getAddress() != null ? point.getAddress() :
+                (point.getFacility() != null ? point.getFacility().getAddress() : null);
 
         return new DropOffPointResponse(
                 point.getId(),
@@ -101,7 +103,12 @@ public class PublicServiceImpl implements PublicService {
                 point.getLat(),
                 point.getLng(),
                 facilityId,
-                facilityName
+                facilityName,
+                address,
+                point.getImageUrl(),
+                point.getOperatingHours(),
+                point.getContactPhone(),
+                point.getAcceptedTypes()
         );
     }
 }

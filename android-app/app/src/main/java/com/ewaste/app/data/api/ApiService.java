@@ -69,6 +69,9 @@ public interface ApiService {
     @PUT("facility/component-requests/{id}/status")
     Call<ComponentRequestResponse> updateComponentRequestStatus(@Path("id") Long id, @Body UpdateComponentRequestStatusRequest request);
 
+    @GET("facility/component-requests")
+    Call<List<ComponentRequestResponse>> getFacilityComponentRequests();
+
     @GET("facility/components")
     Call<List<ComponentResponse>> getFacilityComponents(@Query("category") String category);
 
@@ -86,6 +89,30 @@ public interface ApiService {
     @GET("admin/facilities")
     Call<List<FacilityResponse>> getAdminFacilities();
 
+    @POST("admin/facilities")
+    Call<FacilityResponse> createFacility(@Body CreateFacilityRequest request);
+
+    @PUT("admin/facilities/{id}")
+    Call<FacilityResponse> updateFacility(@Path("id") Long id, @Body UpdateFacilityRequest request);
+
     @PUT("admin/facilities/{id}/verify")
     Call<FacilityResponse> verifyFacility(@Path("id") Long id, @Body VerifyFacilityRequest request);
+
+    @DELETE("admin/facilities/{id}")
+    Call<Void> deleteFacility(@Path("id") Long id);
+
+    @POST("admin/drop-off-points")
+    Call<DropOffPointResponse> createDropOffPoint(@Body CreateDropOffPointRequest request);
+
+    @PUT("admin/drop-off-points/{id}")
+    Call<DropOffPointResponse> updateDropOffPoint(@Path("id") Long id, @Body UpdateDropOffPointRequest request);
+
+    @DELETE("admin/drop-off-points/{id}")
+    Call<Void> deleteDropOffPoint(@Path("id") Long id);
+
+    @GET("admin/staff")
+    Call<List<StaffMemberResponse>> getAdminStaff(@Query("facilityId") Long facilityId);
+
+    @PUT("admin/staff/{id}")
+    Call<StaffMemberResponse> updateStaffAccess(@Path("id") Long id, @Body UpdateStaffAccessRequest request);
 }

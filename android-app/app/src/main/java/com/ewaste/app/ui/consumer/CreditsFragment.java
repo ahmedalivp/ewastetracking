@@ -59,6 +59,10 @@ public class CreditsFragment extends Fragment {
     }
 
     private void setupListeners() {
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         binding.btnRedeem.setOnClickListener(v -> showRedeemDialog());
     }
 

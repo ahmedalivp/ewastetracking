@@ -28,6 +28,7 @@
     <!-- Facility Navigation -->
     <string name="nav_intake">Intake Queue</string>
     <string name="nav_inventory">Inventory</string>
+    <string name="nav_requisitions">Requisitions</string>
 
     <!-- Business Navigation -->
     <string name="nav_browse">Browse Components</string>

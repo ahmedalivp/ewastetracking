@@ -19,6 +19,25 @@
             android:padding="24dp"
             android:gravity="center_horizontal">
 
+            <!-- Top Bar with Inverted Triangle Action Button (▼) -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/btnTriangleMenu"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/bg_triangle_button"
+                    android:src="@drawable/ic_triangle_action"
+                    android:scaleType="centerInside"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Quick Action Menu" />
+            </FrameLayout>
+
             <!-- Header -->
             <ImageView
                 android:layout_width="56dp"
@@ -50,11 +69,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/bg_card"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/divider_color">
+                app:strokeColor="@color/card_stroke">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -208,11 +227,12 @@
                         android:layout_height="52dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/register"
+                        android:textColor="@color/bg_screen"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:cornerRadius="12dp"
+                        app:cornerRadius="14dp"
                         android:backgroundTint="@color/primary_green"
-                        app:elevation="2dp" />
+                        app:elevation="0dp" />
 
                     <!-- Loading Indicator -->
                     <ProgressBar

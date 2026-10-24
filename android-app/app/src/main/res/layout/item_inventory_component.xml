@@ -2,22 +2,27 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="1dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
     app:cardBackgroundColor="@color/bg_card"
     app:strokeWidth="1dp"
-    app:strokeColor="@color/card_stroke">
+    app:strokeColor="@color/card_stroke"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
+        <!-- Top Row: Condition Pill + Type Tag + Status Pill -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,16 +40,22 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
                 android:textSize="11sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:letterSpacing="0.03" />
 
             <TextView
                 android:id="@+id/tvType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Type: RAM"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                android:text="RAM"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/bg_status_pill"
+                android:backgroundTint="@color/bg_surface_variant"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="0dp"
@@ -59,39 +70,42 @@
                 android:textColor="@color/status_completed_text"
                 android:background="@drawable/bg_status_pill"
                 android:backgroundTint="@color/status_completed_bg"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp"
                 android:textSize="11sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:letterSpacing="0.03" />
         </LinearLayout>
 
+        <!-- Component Name -->
         <TextView
             android:id="@+id/tvComponentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="16GB DDR4 RAM Module"
+            android:layout_marginTop="14dp"
             android:textColor="@color/text_headline"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:text="16GB DDR4 RAM Module" />
 
+        <!-- Origin and Timestamp -->
         <TextView
             android:id="@+id/tvOrigin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Salvaged from Item #1 (Laptop)"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="Salvaged from Item #1 (Laptop)" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Harvested: 2026-09-21"
+            android:layout_marginTop="8dp"
             android:textColor="@color/text_tertiary"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            tools:text="Harvested: 2026-10-23 19:42" />
 
     </LinearLayout>
 

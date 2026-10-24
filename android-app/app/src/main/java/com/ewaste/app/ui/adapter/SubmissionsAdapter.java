@@ -63,6 +63,9 @@ public class SubmissionsAdapter extends ListAdapter<EWasteItemResponse, Submissi
         }
 
         public void bind(EWasteItemResponse item, OnItemClickListener listener) {
+            if (binding.tvPassportTag != null) {
+                binding.tvPassportTag.setText(String.format("PASSPORT #%02d", item.getId() != null ? item.getId() : 0));
+            }
             binding.tvCategory.setText(item.getCategoryName() != null ? item.getCategoryName() : "E-Waste");
             binding.tvDescription.setText(item.getDeviceDescription() != null ? item.getDeviceDescription() : "Electronic Device");
             binding.tvDropOffLocation.setText(item.getDropOffPointLabel() != null ? "📍 " + item.getDropOffPointLabel() : "📍 Drop-off Center");

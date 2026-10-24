@@ -76,14 +76,63 @@ public class DataSeeder implements CommandLineRunner {
 
         // 2. Seed Recycling Facility & Drop-Off Points
         RecyclingFacility greenTechFacility = facilityRepository.save(
-                new RecyclingFacility("GreenTech Recycling Center", "45 Eco Boulevard, Metro City", 37.7749, -122.4194, true)
+                new RecyclingFacility("GreenTech Recycling Center", "45 Eco Boulevard, San Francisco, CA", 37.7749, -122.4194, true)
+        );
+        RecyclingFacility bayRecoveryFacility = facilityRepository.save(
+                new RecyclingFacility("Bay Circular Recovery Hub", "1280 Valencia St, San Francisco, CA", 37.7520, -122.4220, true)
         );
 
         DropOffPoint dropPointA = dropOffPointRepository.save(
-                new DropOffPoint(greenTechFacility, "Downtown Public Drop Box A", 37.7750, -122.4180)
+                new DropOffPoint(
+                        greenTechFacility,
+                        "Downtown Public Drop Box A",
+                        37.7750,
+                        -122.4180,
+                        "100 Market St (Plaza Entrance), San Francisco, CA",
+                        "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80",
+                        "24/7 Smart Automated Drop Box",
+                        "+1 (415) 555-0142",
+                        "Smartphones, Tablets, Batteries, Cables, Chargers"
+                )
         );
         DropOffPoint dropPointB = dropOffPointRepository.save(
-                new DropOffPoint(greenTechFacility, "GreenTech Intake Bay B", 37.7749, -122.4194)
+                new DropOffPoint(
+                        greenTechFacility,
+                        "GreenTech Intake Bay B",
+                        37.7749,
+                        -122.4194,
+                        "45 Eco Boulevard, Suite 100, San Francisco, CA",
+                        "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+                        "Mon - Sat: 8:00 AM - 6:00 PM",
+                        "+1 (415) 555-0199",
+                        "All Categories (Laptops, Desktops, Servers, Large Displays)"
+                )
+        );
+        DropOffPoint dropPointC = dropOffPointRepository.save(
+                new DropOffPoint(
+                        greenTechFacility,
+                        "Westside Community E-Kiosk",
+                        37.7600,
+                        -122.4200,
+                        "742 Mission St, San Francisco, CA",
+                        "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=800&q=80",
+                        "Daily: 7:00 AM - 9:00 PM",
+                        "+1 (415) 555-0188",
+                        "Smartphones, Laptops, Audio Gear, Small Appliances"
+                )
+        );
+        DropOffPoint dropPointD = dropOffPointRepository.save(
+                new DropOffPoint(
+                        bayRecoveryFacility,
+                        "Mission Express Intake Depot",
+                        37.7520,
+                        -122.4220,
+                        "1280 Valencia St, San Francisco, CA",
+                        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+                        "Mon - Fri: 9:00 AM - 5:30 PM",
+                        "+1 (415) 555-0176",
+                        "Laptops, Gaming Consoles, Batteries, Peripherals"
+                )
         );
 
         // 3. Seed Users (Admin, Consumers, Facility Staff, Business User)

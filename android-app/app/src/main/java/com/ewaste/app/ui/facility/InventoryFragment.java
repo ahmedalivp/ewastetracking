@@ -34,6 +34,10 @@ public class InventoryFragment extends Fragment {
 
         setupRecyclerView();
         setupSwipeRefresh();
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            com.ewaste.app.ui.consumer.QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         loadInventory();
     }
 

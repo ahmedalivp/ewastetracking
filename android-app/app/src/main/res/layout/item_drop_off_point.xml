@@ -2,12 +2,13 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardDropOffPoint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="1dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="2dp"
     app:cardBackgroundColor="@color/bg_card"
     app:strokeWidth="1dp"
     app:strokeColor="@color/card_stroke">
@@ -15,78 +16,209 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
 
-        <!-- Location Icon Container -->
+        <!-- Place Photo Banner with Status Overlay -->
         <FrameLayout
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:background="@drawable/bg_icon_chip"
-            android:padding="10dp">
+            android:layout_width="match_parent"
+            android:layout_height="145dp">
 
             <ImageView
+                android:id="@+id/ivHubPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_drop_off"
-                app:tint="@color/primary_green"
-                android:contentDescription="Drop Off Icon" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_hub_placeholder"
+                android:contentDescription="Drop-Off Hub Photo" />
+
+            <!-- Dark gradient scrim at the bottom for readability -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="#44000000" />
+
+            <!-- Badges Row on top of image -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="top"
+                android:padding="12dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvOpenStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open Now"
+                    android:textColor="#065F46"
+                    android:background="@drawable/bg_status_pill"
+                    android:backgroundTint="#D1FAE5"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.2 km away"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_status_pill"
+                    android:backgroundTint="#99000000"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvOperatingHoursOverlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="Mon - Sat: 8:00 AM - 6:00 PM"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </FrameLayout>
 
+        <!-- Place Details -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginStart="14dp">
+            android:paddingHorizontal="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="16dp">
 
             <TextView
                 android:id="@+id/tvPointLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drop-Off Location"
+                android:text="Downtown Public Drop Box A"
                 android:textColor="@color/text_headline"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvFacilityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Assigned Recycling Facility"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp" />
+                android:layout_marginTop="2dp"
+                android:text="GreenTech Recycling Center"
+                android:textColor="@color/primary_green"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_drop_off"
+                    app:tint="@color/text_secondary"
+                    android:contentDescription="Address Icon" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:text="100 Market St, San Francisco, CA"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvCoordinates"
+                android:id="@+id/tvAcceptedTypes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Lat: 0.000, Lng: 0.000"
-                android:textColor="@color/primary_green"
-                android:textSize="12sp" />
-        </LinearLayout>
+                android:layout_marginTop="6dp"
+                android:text="Accepts: Laptops, Smartphones, Batteries"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNavigate"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_marginStart="8dp"
-            android:text="Navigate"
-            android:textColor="@color/primary_green"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_drop_off"
-            app:iconTint="@color/primary_green"
-            app:iconSize="14dp"
-            app:iconPadding="4dp"
-            app:cornerRadius="10dp"
-            android:paddingHorizontal="10dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp" />
+            <!-- Action Buttons Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                android:gravity="center_vertical">
+
+                <!-- Navigate (Google Maps) Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNavigate"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:text="Directions"
+                    android:textColor="@color/primary_green"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_directions"
+                    app:iconTint="@color/primary_green"
+                    app:iconSize="16dp"
+                    app:iconPadding="6dp"
+                    app:cornerRadius="12dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+
+                <!-- Drop Off Here (Submit E-Waste) CTA -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDropOffHere"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1.2"
+                    android:layout_marginStart="8dp"
+                    android:text="Drop Off Here"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/primary_green"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_submit"
+                    app:iconTint="@color/white"
+                    app:iconSize="14dp"
+                    app:iconPadding="6dp"
+                    app:cornerRadius="12dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+
+                <!-- Focus on Map Icon Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewOnMap"
+                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    app:icon="@drawable/ic_drop_off"
+                    app:iconTint="@color/primary_green"
+                    app:iconSize="18dp"
+                    app:cornerRadius="12dp"
+                    android:contentDescription="View on map"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

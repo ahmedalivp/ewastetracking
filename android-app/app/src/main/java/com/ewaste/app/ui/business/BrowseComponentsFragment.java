@@ -41,6 +41,10 @@ public class BrowseComponentsFragment extends Fragment {
         setupRecyclerView();
         setupFilterChips();
         setupSwipeRefresh();
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            com.ewaste.app.ui.consumer.QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         loadComponents();
     }
 
@@ -106,14 +110,15 @@ public class BrowseComponentsFragment extends Fragment {
 
         DialogRequestComponentBinding dialogBinding = DialogRequestComponentBinding.inflate(getLayoutInflater());
         dialogBinding.tvDialogPartName.setText(component.getName() != null ? component.getName() : "Salvaged Part");
-        dialogBinding.tvDialogDetails.setText(String.format("Condition: %s • Type: %s • Category: %s",
-                component.getCondition() != null ? component.getCondition() : "FAIR",
-                component.getType() != null ? component.getType() : "Component",
+        String condition = component.getCondition() != null ? component.getCondition() : "GOOD";
+        dialogBinding.tvDialogCondition.setText("CONDITION: " + condition);
+        dialogBinding.tvDialogType.setText(component.getType() != null ? component.getType() : "Component");
+        dialogBinding.tvDialogDetails.setText(String.format("Category: %s • Certified Zero-Landfill Salvage",
                 component.getCategoryName() != null ? component.getCategoryName() : "Electronics"));
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setView(dialogBinding.getRoot())
-                .create();
+        com.google.android.material.bottomsheet.BottomSheetDialog dialog =
+                new com.google.android.material.bottomsheet.BottomSheetDialog(requireContext());
+        dialog.setContentView(dialogBinding.getRoot());
 
         dialogBinding.btnCancel.setOnClickListener(v -> dialog.dismiss());
 

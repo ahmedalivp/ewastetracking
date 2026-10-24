@@ -62,6 +62,9 @@ public class FacilityQueueAdapter extends ListAdapter<EWasteItemResponse, Facili
         }
 
         public void bind(EWasteItemResponse item, OnItemClickListener listener) {
+            String passportTag = item.getId() != null ? String.format("PASSPORT #%02d", item.getId()) : "PASSPORT";
+            binding.tvPassportTag.setText(passportTag);
+
             binding.tvCategory.setText(item.getCategoryName() != null ? item.getCategoryName() : "E-Waste");
             binding.tvSubmitter.setText(item.getConsumerName() != null ? "by " + item.getConsumerName() : "by Consumer");
             binding.tvDescription.setText(item.getDeviceDescription() != null ? item.getDeviceDescription() : "Electronic Device");

@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Luxury Eco Tech Emerald & Mint Palette -->
-    <color name="primary_green">#0D5C3A</color>
-    <color name="primary_green_dark">#083D26</color>
-    <color name="primary_green_light">#E8F5EE</color>
-    <color name="accent_mint">#10B981</color>
-    <color name="accent_green">#10B981</color>
-    <color name="mint_light">#D1FAE5</color>
-    <color name="mint_dark">#047857</color>
+    <!-- Nordic Architectural Minimalist Palette (Light Mode) -->
+    <color name="primary_green">#1F3D2B</color>
+    <color name="primary_green_dark">#14291D</color>
+    <color name="primary_green_light">#E8EFEA</color>
+    <color name="accent_mint">#3B6B4C</color>
+    <color name="accent_green">#3B6B4C</color>
+    <color name="mint_light">#E8EFEA</color>
+    <color name="mint_dark">#1F3D2B</color>
 
-    <!-- Warm Amber & Coral Accents -->
-    <color name="secondary_amber">#D97706</color>
-    <color name="secondary_orange">#D97706</color>
+    <!-- Natural Warm Ochre & Raw Amber -->
+    <color name="secondary_amber">#C27803</color>
+    <color name="secondary_orange">#C27803</color>
     <color name="secondary_orange_light">#FEF3C7</color>
     <color name="amber_light">#FEF3C7</color>
-    <color name="amber_dark">#92400E</color>
+    <color name="amber_dark">#78350F</color>
 
-    <!-- Clean Slate Typography & Backgrounds -->
-    <color name="bg_screen">#F6F9F7</color>
+    <!-- Warm Chalk & Architectural Sandstone Backgrounds -->
+    <color name="bg_screen">#FAF8F5</color>
     <color name="bg_card">#FFFFFF</color>
-    <color name="bg_surface_variant">#EEF4F0</color>
-    <color name="divider_color">#E5EBE6</color>
-    <color name="card_stroke">#E2ECE5</color>
+    <color name="bg_surface_variant">#F3EFEA</color>
+    <color name="divider_color">#E8E3DC</color>
+    <color name="card_stroke">#E5E0D8</color>
 
-    <color name="text_headline">#0F172A</color>
-    <color name="text_primary">#1E293B</color>
-    <color name="text_secondary">#64748B</color>
-    <color name="text_tertiary">#94A3B8</color>
+    <!-- Editorial High-Contrast Typography -->
+    <color name="text_headline">#18181B</color>
+    <color name="text_primary">#27272A</color>
+    <color name="text_secondary">#71717A</color>
+    <color name="text_tertiary">#A1A1AA</color>
 
-    <!-- Pastel Pill Status Badges (Modern SaaS Aesthetic) -->
-    <color name="status_submitted">#0369A1</color>
+    <!-- Subtle Natural Pill Status Badges -->
+    <color name="status_submitted">#0284C7</color>
     <color name="status_submitted_bg">#E0F2FE</color>
     <color name="status_submitted_text">#0369A1</color>
 
@@ -45,24 +46,25 @@
     <color name="status_processed_bg">#FFEDD5</color>
     <color name="status_processed_text">#C2410C</color>
 
-    <color name="status_completed">#065F46</color>
-    <color name="status_completed_bg">#D1FAE5</color>
-    <color name="status_completed_text">#065F46</color>
+    <color name="status_completed">#1F3D2B</color>
+    <color name="status_completed_bg">#E8EFEA</color>
+    <color name="status_completed_text">#1F3D2B</color>
 
-    <color name="status_pending">#B45309</color>
+    <color name="status_pending">#92400E</color>
     <color name="status_pending_bg">#FEF3C7</color>
-    <color name="status_pending_text">#B45309</color>
+    <color name="status_pending_text">#92400E</color>
 
     <color name="status_hazardous">#B91C1C</color>
     <color name="status_hazardous_bg">#FEE2E2</color>
     <color name="status_hazardous_text">#B91C1C</color>
 
-    <color name="status_good_bg">#D1FAE5</color>
-    <color name="status_good_text">#065F46</color>
+    <color name="status_cancelled_bg">#FEE2E2</color>
+    <color name="status_cancelled_text">#B91C1C</color>
 
+    <color name="status_good_bg">#E8EFEA</color>
+    <color name="status_good_text">#1F3D2B</color>
     <color name="status_fair_bg">#FFEDD5</color>
     <color name="status_fair_text">#C2410C</color>
-
     <color name="status_poor_bg">#FEE2E2</color>
     <color name="status_poor_text">#B91C1C</color>
 

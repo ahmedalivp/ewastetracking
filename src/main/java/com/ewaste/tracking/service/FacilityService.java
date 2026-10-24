@@ -29,4 +29,6 @@ public interface FacilityService {
     HazardousMaterialResponse divertHazardousMaterial(String staffEmail, Long materialId);
 
     ComponentRequestResponse updateComponentRequestStatus(String staffEmail, Long requestId, UpdateComponentRequestStatusRequest request);
+
+    List<ComponentRequestResponse> getAllComponentRequests();
 }

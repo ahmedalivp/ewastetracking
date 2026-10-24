@@ -14,11 +14,16 @@ import com.ewaste.app.ui.adapter.ComponentRequestsAdapter;
 import com.ewaste.app.ui.common.Resource;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.List;
+import com.ewaste.app.data.model.ComponentRequestResponse;
+
 public class MyRequestsFragment extends Fragment {
 
     private FragmentMyRequestsBinding binding;
     private BusinessViewModel viewModel;
     private ComponentRequestsAdapter adapter;
+    private final List<ComponentRequestResponse> allRequests = new ArrayList<>();
 
     @Nullable
     @Override
@@ -33,14 +38,58 @@ public class MyRequestsFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(BusinessViewModel.class);
 
         setupRecyclerView();
+        setupFilters();
         setupSwipeRefresh();
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            com.ewaste.app.ui.consumer.QuickActionMenuSheet.newInstance()
+                    .show(getParentFragmentManager(), "QuickActionMenuSheet");
+        });
         loadRequests();
     }
 
     private void setupRecyclerView() {
-        adapter = new ComponentRequestsAdapter();
+        adapter = new ComponentRequestsAdapter(item -> {
+            RequisitionDetailBottomSheet.newInstance(item)
+                    .show(getParentFragmentManager(), "RequisitionDetailBottomSheet");
+        });
         binding.rvMyRequests.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvMyRequests.setAdapter(adapter);
+    }
+
+    private void setupFilters() {
+        binding.chipGroupStatus.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            applyFilter();
+        });
+    }
+
+    private void applyFilter() {
+        int checkedId = binding.chipGroupStatus.getCheckedChipId();
+        List<ComponentRequestResponse> filtered = new ArrayList<>();
+
+        if (checkedId == binding.chipPendingStatus.getId()) {
+            for (ComponentRequestResponse r : allRequests) {
+                if ("PENDING".equalsIgnoreCase(r.getStatus())) filtered.add(r);
+            }
+        } else if (checkedId == binding.chipApprovedStatus.getId()) {
+            for (ComponentRequestResponse r : allRequests) {
+                if ("APPROVED".equalsIgnoreCase(r.getStatus())) filtered.add(r);
+            }
+        } else if (checkedId == binding.chipFulfilledStatus.getId()) {
+            for (ComponentRequestResponse r : allRequests) {
+                if ("FULFILLED".equalsIgnoreCase(r.getStatus())) filtered.add(r);
+            }
+        } else {
+            filtered.addAll(allRequests);
+        }
+
+        if (filtered.isEmpty()) {
+            binding.layoutEmpty.setVisibility(View.VISIBLE);
+            binding.rvMyRequests.setVisibility(View.GONE);
+        } else {
+            binding.layoutEmpty.setVisibility(View.GONE);
+            binding.rvMyRequests.setVisibility(View.VISIBLE);
+        }
+        adapter.submitList(filtered);
     }
 
     private void setupSwipeRefresh() {
@@ -59,14 +108,11 @@ public class MyRequestsFragment extends Fragment {
                 }
             } else if (resource.status == Resource.Status.SUCCESS) {
                 binding.progressBar.setVisibility(View.GONE);
-                if (resource.data != null && !resource.data.isEmpty()) {
-                    binding.layoutEmpty.setVisibility(View.GONE);
-                    binding.rvMyRequests.setVisibility(View.VISIBLE);
-                    adapter.submitList(resource.data);
-                } else {
-                    binding.layoutEmpty.setVisibility(View.VISIBLE);
-                    binding.rvMyRequests.setVisibility(View.GONE);
+                allRequests.clear();
+                if (resource.data != null) {
+                    allRequests.addAll(resource.data);
                 }
+                applyFilter();
             } else if (resource.status == Resource.Status.ERROR) {
                 binding.progressBar.setVisibility(View.GONE);
                 String msg = resource.message != null ? resource.message : "Failed to load requests";

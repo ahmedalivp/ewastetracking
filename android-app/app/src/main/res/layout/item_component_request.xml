@@ -5,9 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="1dp"
+    android:layout_marginVertical="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
     app:cardBackgroundColor="@color/bg_card"
     app:strokeWidth="1dp"
     app:strokeColor="@color/card_stroke">
@@ -16,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +45,7 @@
                 android:background="@drawable/bg_status_pill"
                 android:backgroundTint="@color/status_pending_bg"
                 android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:paddingVertical="5dp"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -51,7 +54,7 @@
             android:id="@+id/tvComponentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:text="Intel Core i7-1185G7 CPU"
             android:textColor="@color/text_headline"
             android:textSize="16sp"
@@ -66,15 +69,31 @@
             android:textColor="@color/text_secondary"
             android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/tvRequesterName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Requested by Circular Electronics"
-            android:textColor="@color/primary_green_dark"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvRequesterName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Requested by Circular Electronics"
+                android:textColor="@color/primary_green"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Details →"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 

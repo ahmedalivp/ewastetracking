@@ -108,6 +108,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
+        binding.btnTriangleMenu.setOnClickListener(v -> {
+            com.ewaste.app.ui.consumer.QuickActionMenuSheet.newInstance()
+                    .show(getSupportFragmentManager(), "QuickActionMenuSheet");
+        });
         binding.btnRegister.setOnClickListener(v -> performRegistration());
         binding.tvLoginLink.setOnClickListener(v -> finish());
     }

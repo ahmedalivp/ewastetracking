@@ -97,6 +97,13 @@ public class FacilityController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/component-requests")
+    @Operation(summary = "List all business component requisitions", description = "Retrieves all component requests from circular businesses for review and fulfillment.")
+    public ResponseEntity<List<ComponentRequestResponse>> getAllComponentRequests() {
+        List<ComponentRequestResponse> requests = facilityService.getAllComponentRequests();
+        return ResponseEntity.ok(requests);
+    }
+
     @PutMapping("/component-requests/{id}/status")
     @Operation(summary = "Update status of business component requisition", description = "Approves, fulfills, or rejects an external circular business request for a salvaged component.")
     public ResponseEntity<ComponentRequestResponse> updateComponentRequestStatus(

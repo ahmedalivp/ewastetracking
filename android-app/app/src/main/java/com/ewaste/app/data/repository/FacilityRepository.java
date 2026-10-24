@@ -180,4 +180,51 @@ public class FacilityRepository {
 
         return result;
     }
+
+    public LiveData<Resource<List<ComponentRequestResponse>>> getComponentRequests() {
+        MutableLiveData<Resource<List<ComponentRequestResponse>>> result = new MutableLiveData<>();
+        result.setValue(Resource.loading());
+
+        apiService.getFacilityComponentRequests().enqueue(new Callback<List<ComponentRequestResponse>>() {
+            @Override
+            public void onResponse(Call<List<ComponentRequestResponse>> call, Response<List<ComponentRequestResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    result.setValue(Resource.success(response.body()));
+                } else {
+                    result.setValue(Resource.error("Failed to load requisitions (" + response.code() + ")", null));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ComponentRequestResponse>> call, Throwable t) {
+                result.setValue(Resource.error("Network error: " + t.getMessage(), null));
+            }
+        });
+
+        return result;
+    }
+
+    public LiveData<Resource<ComponentRequestResponse>> updateComponentRequestStatus(Long requestId, String status) {
+        MutableLiveData<Resource<ComponentRequestResponse>> result = new MutableLiveData<>();
+        result.setValue(Resource.loading());
+
+        UpdateComponentRequestStatusRequest body = new UpdateComponentRequestStatusRequest(status);
+        apiService.updateComponentRequestStatus(requestId, body).enqueue(new Callback<ComponentRequestResponse>() {
+            @Override
+            public void onResponse(Call<ComponentRequestResponse> call, Response<ComponentRequestResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    result.setValue(Resource.success(response.body()));
+                } else {
+                    result.setValue(Resource.error("Failed to update status (" + response.code() + ")", null));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ComponentRequestResponse> call, Throwable t) {
+                result.setValue(Resource.error("Network error: " + t.getMessage(), null));
+            }
+        });
+
+        return result;
+    }
 }

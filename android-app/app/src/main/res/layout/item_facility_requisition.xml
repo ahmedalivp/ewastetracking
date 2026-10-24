@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/card_stroke">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header: Meta ID & Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvRequestMeta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Requisition #01 • 2026-10-23"
+                android:textColor="@color/text_tertiary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PENDING"
+                android:textColor="@color/status_pending_text"
+                android:background="@drawable/bg_status_pill"
+                android:backgroundTint="@color/status_pending_bg"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Component Name -->
+        <TextView
+            android:id="@+id/tvComponentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Intel Core i7-1185G7 CPU"
+            android:textColor="@color/text_headline"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTypeAndCondition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Type: CPU • Condition: GOOD"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <!-- Circular Provenance & Recipient Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:background="@color/bg_surface_variant"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvBusinessName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏢 Requisitioner: Circular Electronics Ltd"
+                android:textColor="@color/text_headline"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDonorDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="📦 Donor: Passport #01 • Dell XPS 15"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Action Controls -->
+        <LinearLayout
+            android:id="@+id/layoutActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <!-- Approve Button (visible when PENDING) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnApprove"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:text="Approve"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary_green"
+                android:textSize="12sp"
+                app:cornerRadius="12dp"
+                android:visibility="gone" />
+
+            <!-- Fulfill Button (visible when APPROVED) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFulfill"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:text="Fulfill &amp; Certify"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary_green"
+                android:textSize="12sp"
+                app:cornerRadius="12dp"
+                android:visibility="gone" />
+
+            <!-- Fulfilled Completion Badge -->
+            <TextView
+                android:id="@+id/tvTransferCompleteBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛡️ Certified Transfer Completed"
+                android:textColor="@color/primary_green"
+                android:background="@drawable/bg_status_pill"
+                android:backgroundTint="@color/primary_green_light"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

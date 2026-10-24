@@ -15,6 +15,10 @@ public class ComponentRequestResponse {
     private ComponentCondition componentCondition;
     private RequestStatus status;
     private LocalDateTime requestedAt;
+    private Long originalItemId;
+    private String originalItemDescription;
+    private String categoryName;
+    private String facilityName;
 
     public ComponentRequestResponse() {}
 
@@ -31,6 +35,27 @@ public class ComponentRequestResponse {
         this.componentCondition = componentCondition;
         this.status = status;
         this.requestedAt = requestedAt;
+    }
+
+    public ComponentRequestResponse(Long id, Long businessId, String businessName,
+                                    Long componentId, String componentName, String componentType,
+                                    ComponentCondition componentCondition, RequestStatus status,
+                                    LocalDateTime requestedAt, Long originalItemId,
+                                    String originalItemDescription, String categoryName,
+                                    String facilityName) {
+        this.id = id;
+        this.businessId = businessId;
+        this.businessName = businessName;
+        this.componentId = componentId;
+        this.componentName = componentName;
+        this.componentType = componentType;
+        this.componentCondition = componentCondition;
+        this.status = status;
+        this.requestedAt = requestedAt;
+        this.originalItemId = originalItemId;
+        this.originalItemDescription = originalItemDescription;
+        this.categoryName = categoryName;
+        this.facilityName = facilityName;
     }
 
     public Long getId() {
@@ -103,5 +128,37 @@ public class ComponentRequestResponse {
 
     public void setRequestedAt(LocalDateTime requestedAt) {
         this.requestedAt = requestedAt;
+    }
+
+    public Long getOriginalItemId() {
+        return originalItemId;
+    }
+
+    public void setOriginalItemId(Long originalItemId) {
+        this.originalItemId = originalItemId;
+    }
+
+    public String getOriginalItemDescription() {
+        return originalItemDescription;
+    }
+
+    public void setOriginalItemDescription(String originalItemDescription) {
+        this.originalItemDescription = originalItemDescription;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getFacilityName() {
+        return facilityName;
+    }
+
+    public void setFacilityName(String facilityName) {
+        this.facilityName = facilityName;
     }
 }
