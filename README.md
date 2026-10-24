@@ -1,578 +1,511 @@
-# E-Waste Recycling & Component Tracking Platform
+# EcoTrack: E-Waste Recycling & Circular Component Tracking Platform
 
-A robust, textbook-correct Spring Boot 3 REST API backend written in Java 17 designed for an **E-Waste Recycling & Component Tracking Platform**. The platform drives circular economy initiatives by tracking discarded electronic items, salvaging functional components for secondary markets, ensuring safe diversion of toxic materials from landfills, and incentivizing consumer recycling through rewards.
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-17%20LTS-orange.svg)](https://www.oracle.com/java/)
+[![Android](https://img.shields.io/badge/Android-API%2026%20--%2034-green.svg)](https://developer.android.com/)
+[![Database](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20Neon%20Serverless-blue.svg)](https://neon.tech/)
+[![Cloud](https://img.shields.io/badge/Cloud-Render%20Web%20Service-purple.svg)](https://render.com/)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
+
+A full-stack, enterprise-grade circular economy platform engineered to tackle global electronic waste. **EcoTrack** unites household consumers, recycling centers, refurbishment enterprises, and regulatory administrators into an auditable, closed-loop tracking ecosystem. It tracks discarded electronics, salvages reusable components for secondary marketplaces, diverts toxic chemicals from landfills, and incentivizes sustainable habits through gamified recycling credits.
+
+---
+
+## Table of Contents
+1. [Executive Summary & Problem Statement](#executive-summary--problem-statement)
+2. [Platform Architecture & System Topology](#platform-architecture--system-topology)
+3. [Technology Stack](#technology-stack)
+4. [Nordic Architectural Minimalist Design System](#nordic-architectural-minimalist-design-system)
+5. [End-to-End Circular Lifecycle & User Personas](#end-to-end-circular-lifecycle--user-personas)
+   - [Consumer (Household Donor)](#1-consumer-household-donor)
+   - [Facility Staff (Recycling & Salvage Operator)](#2-facility-staff-recycling--salvage-operator)
+   - [Business User (Refurbisher & Enterprise Reclaimer)](#3-business-user-refurbisher--enterprise-reclaimer)
+   - [System Administrator (Governance & Compliance)](#4-system-administrator-governance--compliance)
+6. [Cloud Infrastructure & Production Deployments](#cloud-infrastructure--production-deployments)
+7. [Software Engineering, OOP Principles & Design Patterns](#software-engineering-oop-principles--design-patterns)
+8. [Database Schema & Entity Relationship Diagram](#database-schema--entity-relationship-diagram)
+9. [Complete REST API Specification](#complete-rest-api-specification)
+10. [Native Android Client Architecture (MVVM)](#native-android-client-architecture-mvvm)
+11. [Setup, Installation & Execution Guide](#setup-installation--execution-guide)
+12. [Testing & Verification](#testing--verification)
+
+---
+
+## Executive Summary & Problem Statement
+
+Electronic waste (e-waste) is the fastest-growing municipal waste stream globally, generating over 50 million metric tons annually. Discarded computers, smartphones, and batteries pose severe environmental hazards due to toxic heavy metals (lead, cadmium, mercury, lithium) while simultaneously wasting high-grade salvageable components (RAM, storage drives, displays, microcontrollers).
+
+**EcoTrack** solves this crisis through a transparent, full-lifecycle digital platform:
+- **Consumer Empowerment**: Convenient drop-off kiosk location, transparent item tracking, and immediate credit rewards.
+- **Auditable Triage & Disassembly**: Strict facility workflows ensuring components are safely harvested and toxins are diverted to certified hazardous facilities.
+- **Secondary Market Circularity**: Refurbishment enterprises can acquire verified components directly from recycling centers.
+- **Regulatory Governance**: Platform oversight of facility certifications, public drop-off networks, and staff accountability.
+
+---
+
+## Platform Architecture & System Topology
+
+```mermaid
+graph TB
+    subgraph MobileClient ["Native Android Client (Java / MVVM)"]
+        UI["Nordic Minimalist UI / XML Layouts"]
+        VM["Android ViewModels (LiveData)"]
+        Repo["Data Repositories & Offline Room DB"]
+        Net["Retrofit2 / OkHttp3 with AuthInterceptor"]
+        UI --> VM --> Repo --> Net
+    end
+
+    subgraph CloudInfra ["Production Cloud Infrastructure"]
+        Render["Render Web Service (Spring Boot 3 App)<br/>https://ewastetracking.onrender.com/api/"]
+        Neon["Neon Serverless PostgreSQL Database<br/>AWS us-west-2 Pooler"]
+        Render <-->|JDBC Pool / SSL| Neon
+    end
+
+    Net <-->|HTTPS / JSON / Bearer JWT| Render
+
+    subgraph PlatformRoles ["Ecosystem Personas"]
+        C["Consumer (Alice / Bob)"]
+        S["Facility Staff (John Tech)"]
+        B["Business Enterprise (Sarah Refurb)"]
+        A["Administrator (System Governance)"]
+    end
+
+    C -.->|Submit, Track, Redeem| UI
+    S -.->|Intake, Harvest, Divert| UI
+    B -.->|Browse Parts, Requisition| UI
+    A -.->|Metrics, Hubs, Access| UI
+```
 
 ---
 
 ## Technology Stack
 
-- **Java Version**: Java 17 (LTS)
-- **Framework**: Spring Boot 3.3.4
-- **Persistence & ORM**: Spring Data JPA / Hibernate 6
-- **Database**: H2 In-Memory Database (zero configuration, automatic schema DDL, pre-seeded data)
-- **Security & Auth**: Spring Security 6 + JJWT (0.12.6) for stateless token authentication
-- **API Documentation**: SpringDoc OpenAPI 3 / Swagger UI (`/swagger-ui.html`)
-- **Testing**: JUnit 5, Mockito, Spring Security Test, MockMvc
-- **Build Tool**: Apache Maven
+### Backend
+- **Core Language**: Java 17 LTS
+- **Framework**: Spring Boot 3.3.4 (Web, Security, Data JPA, Validation)
+- **Security**: Spring Security 6.x + JJWT (Java JWT `0.12.6`) stateless Bearer token authentication
+- **Database / ORM**: Hibernate 6.x / Spring Data JPA
+- **Database Engines**:
+  - **Production**: Neon Serverless PostgreSQL (`ep-floral-art-artdqtli-pooler.c-4.us-west-2.aws.neon.tech / neondb`)
+  - **Local / Test**: In-memory H2 Database (`jdbc:h2:mem:ewastedb`)
+- **API Documentation**: SpringDoc OpenAPI 3.0 / Swagger UI (`/swagger-ui.html`)
+- **Build & CI**: Apache Maven 3.8+
+
+### Native Android Mobile Client
+- **Core Language**: Java (minSdk 26, targetSdk 34)
+- **Architecture**: MVVM (Model-View-ViewModel) + Repository Pattern
+- **Networking**: Square Retrofit 2.9.0 + OkHttp 4.12.0 with custom `AuthInterceptor` (automatic JWT Bearer header injection)
+- **Local Persistence & Caching**: AndroidX Room Database 2.6.1 + SharedPreferences (`SessionManager`)
+- **UI & Design**: Google Material Design 3 (`com.google.android.material`), Custom Vector Drawables, ConstraintLayout
+- **QR / Barcode Processing**: ZXing Core 3.5.3 (`QrCodeHelper`) for dynamic QR pass generation
+- **Theming**: Dynamic Dark / Light mode switching persisted via `AppCompatDelegate`
 
 ---
 
-## Quick Start Instructions
+## Nordic Architectural Minimalist Design System
 
-### Prerequisites
-- JDK 17 or higher
-- Apache Maven 3.8+
+The application strictly implements the **Nordic Architectural Minimalist** design philosophy, balancing spacious elegance, high functional contrast, and tactile feedback:
 
-### Running the Application Locally
-Clone the repository and run from the workspace root:
+- **Curated Color Palette**:
+  - `primary_green`: `#1B3B2B` (Deep pine forest)
+  - `primary_green_light`: `#E8F0EC` (Soft organic sage tint)
+  - `accent_green`: `#2D6A4F` (Lush Scandinavian woodland)
+  - `background_light`: `#F8F9F8` (Warm off-white architectural canvas)
+  - `background_dark`: `#121614` (Deep matte charcoal)
+  - `card_light`: `#FFFFFF` & `card_dark`: `#1A201C`
+  - `card_stroke`: `#E2E8E4` (Crisp 1dp structural hairline)
+- **Signature Elements**:
+  - **Inverted Triangle Action Button (▼)**: An unconventional floating action trigger anchored at the top right of all screens, opening the unified system quick actions, profile badge, theme selector, and session controls.
+  - **Floating Island Dock Navigation**: Pill-shaped bottom navigation bar elevated above the canvas with active icon pill badges.
+  - **1-Tap Demo Account Carousel**: Horizontally scrollable role cards (`Alice Green`, `John Tech`, `Sarah Refurb`, `System Admin`) with instant credential population and active green stroke highlights.
 
-```bash
-mvn spring-boot:run
+---
+
+## End-to-End Circular Lifecycle & User Personas
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor C as Consumer
+    actor S as Facility Staff
+    actor B as Business User
+    actor A as Admin
+
+    Note over C, A: 1. Intake & Item Submission
+    C->>C: Selects category & nearest drop-off kiosk
+    C->>C: Submits e-waste item (Generates QR tracking pass)
+    C->>S: Deposits device at facility / kiosk
+
+    Note over S: 2. Facility Intake & Triage
+    S->>S: Scans QR code / Receives item in queue
+    S->>S: Categorizes device & performs initial triage
+    
+    Note over S: 3. Component Salvage & Toxic Diversion
+    S->>S: Harvests reusable components (RAM, SSD, GPU, Display)
+    Note over S: System automatically awards recycling credits to Consumer!
+    S->>S: Flags & diverts hazardous toxins (Batteries, Mercury switches)
+    
+    Note over B, S: 4. Circular Secondary Marketplace
+    B->>B: Browses available harvested components
+    B->>S: Submits component requisition request
+    S->>B: Fulfills and dispatches components for refurbishment
+
+    Note over C: 5. Incentive Redemption
+    C->>C: Views updated green credit balance
+    C->>C: Redeems credits for eco-vouchers & discounts
+
+    Note over A: 6. Platform Governance
+    A->>A: Monitors live platform diversion metrics & CO2 offset
+    A->>A: Manages recycling hubs, kiosks, and staff permissions
 ```
 
-The application will start on port **8080**.
+### 1. Consumer (Household Donor)
+- **Drop-Off Locator**: Browse verified recycling facilities and automated public collection kiosks with coordinates, operating hours, and accepted device categories.
+- **Item Submission & Digital Pass**: Register discarded electronics (Laptops, Smartphones, Tablets, Appliances) and generate an instant scannable QR verification pass.
+- **Audit Timeline**: Track items through real-time state changes (`SUBMITTED` → `RECEIVED` → `CATEGORIZED` → `HARVESTED` → `DIVERTED` → `COMPLETED`).
+- **Recycling Credits & Rewards**: Earn automated green credits when components are salvaged or hazardous materials are safely diverted. Redeem credits for gift cards and eco-friendly vouchers.
 
-- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-- **OpenAPI 3 JSON Specification**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
-- **H2 Database Web Console**: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-  - JDBC URL: `jdbc:h2:mem:ewastedb`
-  - Username: `sa`
-  - Password: *(empty)*
+### 2. Facility Staff (Recycling & Salvage Operator)
+- **Intake Queue & Fast Check-In**: View pending drop-offs, verify donor devices, check items into the facility registry, and update tracking records.
+- **Device Triage & Categorization**: Record technical triage inspection notes and categorize device condition.
+- **Component Harvesting**: Dismantle hardware and catalog salvaged working parts (`RAM`, `Storage`, `Motherboards`, `Screens`, `Power Units`). Automatically prevents duplicate registrations and triggers immediate consumer credit awards.
+- **Hazardous Material Diversion**: Identify toxic sub-assemblies (`Lithium-Ion Batteries`, `Lead-acid`, `Mercury bulbs`) and log their certified diversion from municipal landfills.
+- **Requisition Fulfillment**: Review, approve, and fulfill component orders placed by verified refurbishers.
 
-### Running Unit & Integration Tests
-```bash
-mvn test
-```
+### 3. Business User (Refurbisher & Enterprise Reclaimer)
+- **Salvaged Parts Marketplace**: Live catalog of harvested components with real-time condition grading (`NEW`, `EXCELLENT`, `GOOD`, `FAIR`) and hardware category filters.
+- **One-Tap Requisition**: Claim working parts directly from recycling centers with automated requisition status workflows (`PENDING` → `APPROVED` → `FULFILLED` → `CANCELLED`).
+- **Procurement Tracking**: Monitor order histories, delivery stages, and facility dispatch confirmations.
 
----
-
-## Pre-Seeded Demonstration Accounts
-
-On startup (`CommandLineRunner` in `DataSeeder`), the database automatically seeds:
-
-| Role | Email | Password | Details |
-| :--- | :--- | :--- | :--- |
-| **Admin** | `admin@ewaste.org` | `admin123` | Executive Board & Compliance |
-| **Facility Staff** | `staff@greentech.org` | `staff123` | GreenTech Recycling Center |
-| **Consumer 1** | `alice@example.com` | `pass123` | Alice Green (Initial credits: 100) |
-| **Consumer 2** | `bob@example.com` | `pass123` | Bob Clean (Initial credits: 50) |
-| **Business User** | `contact@circularelectronics.com` | `biz123` | Circular Electronics Inc. (Refurbisher) |
-
-*Pre-seeded items*: 2 sample e-waste submissions (`SUBMITTED` status) submitted by Alice and Bob with initial tracking records.
+### 4. System Administrator (Governance & Compliance)
+- **Executive Impact Pulse**: Real-time KPI dashboard tracking total kg of e-waste diverted, estimated metric tons of CO₂ emissions prevented, components reclaimed, and active network footprint.
+- **Dual-Pathway Facility Onboarding**: Direct provisioning of authorized recycling centers or auditing and approving pending facility sign-in applications.
+- **Kiosk & Drop-Off Network CRUD**: Deploy, edit, and link consumer-facing collection boxes and automated lockers to parent processing facilities.
+- **Staff Access Controls & Reassignments**: Manage operational permissions, toggle operator accounts (`ACTIVE` / `SUSPENDED`), and reassign staff members between operating centers.
 
 ---
 
-## OOP Principles Demonstrated
+## Cloud Infrastructure & Production Deployments
 
-| OOP Principle | Relevant Class / Interface | One-Line Explanation |
+The platform is deployed entirely in the cloud with zero reliance on local emulators or proxy tunnels:
+
+| Component | Provider / Platform | Host / Details |
 | :--- | :--- | :--- |
-| **Encapsulation** | `User`, `Consumer`, `EWasteItem`, `Component`, `HazardousMaterial`, `TrackingRecord`, etc. | All entity fields are declared strictly `private` with state access and mutations governed through public accessors and validated mutators. |
-| **Inheritance** | `User` (Abstract Base Class), `Consumer`, `FacilityStaff`, `BusinessUser`, `AdminUser` | Base `User` class encapsulates common identity, email, password hash, and audit fields, extended by specialized child classes using JPA `JOINED` inheritance. |
-| **Polymorphism** | `User.getDashboardSummary()` | The abstract method `getDashboardSummary()` declared on `User` is overridden with distinct behaviors in `Consumer`, `FacilityStaff`, `BusinessUser`, and `AdminUser` to yield role-tailored dashboard summaries. |
-| **Abstraction** | `TrackingService`, `CreditService`, `ConsumerService`, `FacilityService`, `BusinessService`, `AdminService`, `CreditStrategy` | Clean separation of contract from implementation where business capabilities are defined in public interfaces, completely decoupling callers from concrete implementations in `service.impl`. |
-| **Composition** | `EWasteItem` | Models a structural "has-a" relationship composed of `EWasteCategory`, `DropOffPoint`, `List<Component>`, and `List<HazardousMaterial>` instead of inheritance. |
-| **Strategy Pattern** | `CreditStrategy`, `StandardCreditStrategy`, `HazardousBonusCreditStrategy` | Encapsulates interchangeable credit reward calculation algorithms selected dynamically at runtime inside `CreditServiceImpl` based on the presence of hazardous materials. |
-| **Builder Pattern** | `EWasteItemBuilder` | A hand-written GoF Builder pattern (no Lombok shortcuts) that provides step-by-step assembly, invariant validation, and safe defaults for constructing `EWasteItem` instances. |
+| **REST API Backend** | **Render** | `https://ewastetracking.onrender.com/api/` |
+| **Relational Database** | **Neon Serverless PostgreSQL** | `ep-floral-art-artdqtli-pooler.c-4.us-west-2.aws.neon.tech` / `neondb` |
+| **Source Control & CI** | **GitHub** | `https://github.com/ahmedalivp/ewastetracking.git` (`main` branch) |
+| **Android Client** | **Physical Device / APK** | Preconfigured with live cloud `BASE_URL` |
+
+### Cloud Schema Migrations
+The production Neon database maintains schema parity with the latest platform features:
+```sql
+ALTER TABLE users ADD COLUMN IF NOT EXISTS active BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE recycling_facilities ADD COLUMN IF NOT EXISTS active BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE recycling_facilities ADD COLUMN IF NOT EXISTS contact_phone VARCHAR(50);
+```
 
 ---
 
-## Entity Relationship Diagram (Mermaid)
+## Software Engineering, OOP Principles & Design Patterns
+
+The architecture demonstrates textbook-correct object-oriented design and enterprise architectural patterns:
+
+| Pattern / Principle | Class / Interface | Architectural Role & Implementation Details |
+| :--- | :--- | :--- |
+| **Encapsulation** | All entities in `entity/` | Strict `private` field visibility with validated accessors and state mutation methods. Prevents unauthorized state alteration. |
+| **Inheritance** | `User` (Abstract Base), `Consumer`, `FacilityStaff`, `BusinessUser`, `AdminUser` | JPA `JOINED` inheritance strategy. Base table `users` contains universal authentication and audit columns; child tables contain specialized attributes. |
+| **Polymorphism** | `User.getDashboardSummary()` | Abstract method on `User` dynamically implemented across all 4 subclasses to provide role-specific dashboard overviews at runtime. |
+| **Abstraction** | `TrackingService`, `CreditService`, `AdminService`, `FacilityService`, etc. | Interface-driven service design. High-level callers interact strictly with public interface contracts decoupled from concrete Spring `@Service` implementations. |
+| **Composition** | `EWasteItem` | Modeled as a structural composite containing `EWasteCategory`, `DropOffPoint`, `List<Component>`, and `List<HazardousMaterial>`. |
+| **Strategy Pattern** | `CreditStrategy`, `StandardCreditStrategy`, `HazardousBonusCreditStrategy` | Encapsulates credit computation algorithms. `CreditServiceImpl` dynamically selects strategies based on toxic material diversion and component value. |
+| **GoF Builder Pattern** | `EWasteItemBuilder` | Fluent, hand-crafted Builder pattern enforcing invariant checks, valid category assignment, and default tracking statuses before persistence. |
+| **Repository Pattern** | `repository/*Repository` | Spring Data JPA abstractions managing relational persistence, query generation, and transactional boundaries. |
+| **MVVM Pattern** | `android-app` (`ui/*ViewModel`) | Android Architecture Components. Complete separation of UI views (`Activity`/`Fragment`) from business logic and data states using `LiveData` and reactive wrappers (`Resource<T>`). |
+
+---
+
+## Database Schema & Entity Relationship Diagram
 
 ```mermaid
 classDiagram
     class User {
         <<abstract>>
-        -Long id
-        -String fullName
-        -String email
-        -String passwordHash
-        -Role role
-        -LocalDateTime createdAt
+        +Long id
+        +String fullName
+        +String email
+        +String passwordHash
+        +Role role
+        +boolean active
+        +LocalDateTime createdAt
         +getDashboardSummary()* String
     }
 
     class Consumer {
-        -int creditBalance
-        +getDashboardSummary() String
+        +int creditBalance
     }
 
     class FacilityStaff {
-        -RecyclingFacility facility
-        +getDashboardSummary() String
+        +RecyclingFacility facility
     }
 
     class BusinessUser {
-        -String businessName
-        -String businessType
-        +getDashboardSummary() String
+        +String businessName
+        +String businessType
     }
 
     class AdminUser {
-        -String department
-        +getDashboardSummary() String
+        +String department
     }
 
-    User <|-- Consumer : extends
-    User <|-- FacilityStaff : extends
-    User <|-- BusinessUser : extends
-    User <|-- AdminUser : extends
+    User <|-- Consumer
+    User <|-- FacilityStaff
+    User <|-- BusinessUser
+    User <|-- AdminUser
 
     class RecyclingFacility {
-        -Long id
-        -String name
-        -String address
-        -Double lat
-        -Double lng
-        -boolean verifiedByAdmin
+        +Long id
+        +String name
+        +String address
+        +Double lat
+        +Double lng
+        +String contactPhone
+        +boolean active
+        +boolean verifiedByAdmin
     }
 
     class DropOffPoint {
-        -Long id
-        -RecyclingFacility facility
-        -String label
-        -Double lat
-        -Double lng
+        +Long id
+        +RecyclingFacility facility
+        +String label
+        +Double lat
+        +Double lng
     }
 
     class EWasteCategory {
-        -Long id
-        -String name
-        -String description
+        +Long id
+        +String name
+        +String description
     }
 
     class EWasteItem {
-        -Long id
-        -Consumer consumer
-        -EWasteCategory category
-        -DropOffPoint dropOffPoint
-        -String deviceDescription
-        -EWasteStatus status
-        -LocalDateTime submittedAt
-        -List~Component~ components
-        -List~HazardousMaterial~ hazardousMaterials
+        +Long id
+        +Consumer consumer
+        +EWasteCategory category
+        +DropOffPoint dropOffPoint
+        +String deviceDescription
+        +EWasteStatus status
+        +LocalDateTime submittedAt
     }
 
     class Component {
-        -Long id
-        -EWasteItem ewasteItem
-        -String name
-        -String type
-        -ComponentCondition condition
-        -ComponentStatus status
-        -LocalDateTime harvestedAt
+        +Long id
+        +EWasteItem ewasteItem
+        +String name
+        +String type
+        +ComponentCondition condition
+        +ComponentStatus status
+        +LocalDateTime harvestedAt
     }
 
     class HazardousMaterial {
-        -Long id
-        -EWasteItem ewasteItem
-        -HazardousType type
-        -DiversionStatus diversionStatus
+        +Long id
+        +EWasteItem ewasteItem
+        +HazardousType type
+        +DiversionStatus diversionStatus
     }
 
     class ComponentRequest {
-        -Long id
-        -BusinessUser business
-        -Component component
-        -RequestStatus status
-        -LocalDateTime requestedAt
+        +Long id
+        +BusinessUser business
+        +Component component
+        +RequestStatus status
+        +LocalDateTime requestedAt
     }
 
     class TrackingRecord {
-        -Long id
-        -EntityType entityType
-        -Long entityId
-        -String status
-        -User actor
-        -LocalDateTime timestamp
-        -String notes
+        +Long id
+        +EntityType entityType
+        +Long entityId
+        +String status
+        +User actor
+        +LocalDateTime timestamp
+        +String notes
     }
 
     class RecyclingCredit {
-        -Long id
-        -Consumer consumer
-        -int amount
-        -String reason
-        -LocalDateTime awardedAt
+        +Long id
+        +Consumer consumer
+        +int amount
+        +String reason
+        +LocalDateTime awardedAt
     }
 
     class CreditRedemption {
-        -Long id
-        -Consumer consumer
-        -int amount
-        -String redeemedFor
-        -LocalDateTime redeemedAt
+        +Long id
+        +Consumer consumer
+        +int amount
+        +String redeemedFor
+        +LocalDateTime redeemedAt
     }
 
-    FacilityStaff --> RecyclingFacility : works at
-    DropOffPoint --> RecyclingFacility : belongs to
-    EWasteItem --> Consumer : submitted by
-    EWasteItem --> EWasteCategory : classified under
-    EWasteItem --> DropOffPoint : collected at
-    EWasteItem *-- Component : contains (harvested)
-    EWasteItem *-- HazardousMaterial : contains (toxic)
-    ComponentRequest --> BusinessUser : requested by
-    ComponentRequest --> Component : requisition for
-    TrackingRecord --> User : action logged by
-    RecyclingCredit --> Consumer : awarded to
-    CreditRedemption --> Consumer : redeemed by
+    FacilityStaff --> RecyclingFacility
+    DropOffPoint --> RecyclingFacility
+    EWasteItem --> Consumer
+    EWasteItem --> EWasteCategory
+    EWasteItem --> DropOffPoint
+    EWasteItem *-- Component
+    EWasteItem *-- HazardousMaterial
+    ComponentRequest --> BusinessUser
+    ComponentRequest --> Component
+    TrackingRecord --> User
+    RecyclingCredit --> Consumer
+    CreditRedemption --> Consumer
 ```
 
 ---
 
-## Complete API Catalog & JSON Examples
+## Complete REST API Specification
 
-### 1. Authentication Endpoints
+### 1. Authentication & Identity (`/api/auth`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Public | Register a new user (`CONSUMER`, `FACILITY_STAFF`, `BUSINESS`, `ADMIN`). |
+| `POST` | `/api/auth/login` | Public | Authenticate with email/password; returns JWT token and dashboard summary. |
+| `GET` | `/api/auth/profile` | Authenticated | Retrieve authenticated user profile with role-specific attributes. |
 
-#### Register (`POST /api/auth/register`)
-- **Access**: Public
-- **Request**:
-```json
-{
-  "fullName": "David Brown",
-  "email": "david@example.com",
-  "password": "securePassword123",
-  "role": "CONSUMER"
-}
-```
-- **Response (201 Created)**:
-```json
-{
-  "token": "eyJhbGciOiJIUzM4NCJ9...",
-  "type": "Bearer",
-  "id": 6,
-  "email": "david@example.com",
-  "fullName": "David Brown",
-  "role": "CONSUMER",
-  "dashboardSummary": "Consumer [David Brown] - Available Recycling Credits: 0 pts"
-}
-```
+### 2. Public Platform Discovery (`/api`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/categories` | Public | List all supported e-waste categories (Laptops, Phones, Batteries, etc.). |
+| `GET` | `/api/drop-off-points` | Public | List all public kiosks and smart drop-off boxes with parent facility data. |
+| `GET` | `/api/impact` | Public | Aggregate platform environmental impact (total kg diverted, CO₂ saved). |
 
-#### Login (`POST /api/auth/login`)
-- **Access**: Public
-- **Request**:
-```json
-{
-  "email": "alice@example.com",
-  "password": "pass123"
-}
-```
-- **Response (200 OK)**:
-```json
-{
-  "token": "eyJhbGciOiJIUzM4NCJ9...",
-  "type": "Bearer",
-  "id": 2,
-  "email": "alice@example.com",
-  "fullName": "Alice Green",
-  "role": "CONSUMER",
-  "dashboardSummary": "Consumer [Alice Green] - Available Recycling Credits: 100 pts"
-}
-```
+### 3. Consumer Operations (`/api/consumer`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/consumer/ewaste-items` | `ROLE_CONSUMER` | Register a new e-waste item for drop-off. |
+| `GET` | `/api/consumer/ewaste-items` | `ROLE_CONSUMER` | List all historical submissions for the authenticated consumer. |
+| `GET` | `/api/consumer/ewaste-items/{id}/tracking` | `ROLE_CONSUMER` | Retrieve immutable audit timeline for an item. |
+| `GET` | `/api/consumer/credits` | `ROLE_CONSUMER` | Retrieve recycling credit history and rewards awarded. |
+| `POST` | `/api/consumer/credits/redeem` | `ROLE_CONSUMER` | Redeem green credits for vouchers and merchant discounts. |
 
-#### User Profile (`GET /api/auth/profile`)
-- **Access**: Authenticated (`ROLE_CONSUMER`, `ROLE_FACILITY_STAFF`, `ROLE_BUSINESS`, `ROLE_ADMIN`)
-- **Response (200 OK)**:
-```json
-{
-  "id": 2,
-  "fullName": "Alice Green",
-  "email": "alice@example.com",
-  "role": "CONSUMER",
-  "createdAt": "2026-09-21T21:12:27.016083",
-  "dashboardSummary": "Consumer [Alice Green] - Available Recycling Credits: 100 pts",
-  "creditBalance": 100,
-  "facilityId": null,
-  "facilityName": null,
-  "businessName": null,
-  "businessType": null,
-  "department": null
-}
+### 4. Facility Operations & Salvage (`/api/facility`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/facility/ewaste-items` | `ROLE_FACILITY_STAFF` | Retrieve incoming intake queue filtered by status (`SUBMITTED`, etc.). |
+| `PUT` | `/api/facility/ewaste-items/{id}/receive` | `ROLE_FACILITY_STAFF` | Confirm physical receipt of e-waste device at facility. |
+| `PUT` | `/api/facility/ewaste-items/{id}/categorize`| `ROLE_FACILITY_STAFF` | Complete device triage and log inspection notes. |
+| `POST` | `/api/facility/ewaste-items/{id}/components`| `ROLE_FACILITY_STAFF` | Harvest reusable component (auto-awards consumer credits). |
+| `POST` | `/api/facility/ewaste-items/{id}/hazardous-materials` | `ROLE_FACILITY_STAFF` | Flag hazardous toxic substance inside device. |
+| `PUT` | `/api/facility/hazardous-materials/{id}/divert` | `ROLE_FACILITY_STAFF` | Log verified diversion to certified hazardous facility. |
+| `GET` | `/api/facility/components` | `ROLE_FACILITY_STAFF` | List harvested components residing in facility inventory. |
+| `GET` | `/api/facility/component-requests` | `ROLE_FACILITY_STAFF` | List component requisition requests from business enterprises. |
+| `PUT` | `/api/facility/component-requests/{id}/status` | `ROLE_FACILITY_STAFF` | Update order status (`FULFILLED`, `CANCELLED`). |
+
+### 5. Business Circular Marketplace (`/api/business`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/business/components` | `ROLE_BUSINESS` | Search and filter harvested parts available for secondary reuse. |
+| `POST` | `/api/business/component-requests` | `ROLE_BUSINESS` | Place a requisition request for a harvested component. |
+| `GET` | `/api/business/component-requests` | `ROLE_BUSINESS` | Retrieve business requisition orders and fulfillment status. |
+
+### 6. Administrative Governance & Compliance (`/api/admin`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/admin/metrics` | `ROLE_ADMIN` | Executive metrics (diversion kg, CO₂, pending center reviews). |
+| `GET` | `/api/admin/facilities` | `ROLE_ADMIN` | List recycling centers with search and status filters. |
+| `POST` | `/api/admin/facilities` | `ROLE_ADMIN` | Directly provision and onboard a new recycling facility. |
+| `PUT` | `/api/admin/facilities/{id}` | `ROLE_ADMIN` | Update facility address, coordinates, and contact details. |
+| `PUT` | `/api/admin/facilities/{id}/verify` | `ROLE_ADMIN` | Grant or revoke official circular certification. |
+| `DELETE`| `/api/admin/facilities/{id}` | `ROLE_ADMIN` | Deactivate/remove facility from operating registry. |
+| `POST` | `/api/admin/drop-off-points` | `ROLE_ADMIN` | Deploy a new public drop-off kiosk or smart box. |
+| `PUT` | `/api/admin/drop-off-points/{id}` | `ROLE_ADMIN` | Edit kiosk location and parent facility binding. |
+| `DELETE`| `/api/admin/drop-off-points/{id}` | `ROLE_ADMIN` | Decommission a public collection point. |
+| `GET` | `/api/admin/staff` | `ROLE_ADMIN` | List all facility operators and current center assignments. |
+| `PUT` | `/api/admin/staff/{id}` | `ROLE_ADMIN` | Toggle staff active credentials or reassign center. |
+
+---
+
+## Native Android Client Architecture (MVVM)
+
+The mobile client is structured cleanly into modular layers following Google's recommended Android architecture:
+
+```
+android-app/app/src/main/java/com/ewaste/app/
+├── EWasteApplication.java          # Global application state & theme initializer
+├── data/
+│   ├── api/                        # ApiClient, ApiService, AuthInterceptor (JWT Injection)
+│   ├── local/                      # SessionManager (Preferences), Room AppDatabase
+│   ├── model/                      # Java DTOs matching Spring Boot JSON models
+│   └── repository/                 # AuthRepository, ConsumerRepository, FacilityRepository, etc.
+├── ui/
+│   ├── auth/                       # LoginActivity (Horizontal Demo Cards), RegisterActivity
+│   ├── consumer/                   # ConsumerMainActivity, DropOff, Submissions, Credits
+│   ├── facility/                   # FacilityMainActivity, IntakeQueue, Harvesting, Requisitions
+│   ├── business/                   # BusinessMainActivity, Marketplace, Requisitions
+│   ├── admin/                      # AdminMainActivity, Centers, Kiosks, Staff, BottomSheets
+│   ├── adapter/                    # RecyclerView Adapters with DiffUtil & ViewHolder patterns
+│   └── common/                     # Resource<T>, QuickActionMenuSheet (▼ Inverted Triangle)
+└── util/                           # QrCodeHelper (ZXing generation), MapHelper
 ```
 
 ---
 
-### 2. Public Endpoints
+## Setup, Installation & Execution Guide
 
-#### Get Categories (`GET /api/categories`)
-- **Access**: Public
-- **Response (200 OK)**:
-```json
-[
-  {
-    "id": 1,
-    "name": "Laptop",
-    "description": "Portable computers, ultrabooks, and notebooks"
-  },
-  {
-    "id": 2,
-    "name": "Smartphone",
-    "description": "Mobile cellular phones, phablets, and tablets"
-  }
-]
+### Demonstration Pre-Seeded Accounts
+The platform includes pre-seeded demonstration credentials across all roles:
+
+| Persona | Email | Password | Role & Scope |
+| :--- | :--- | :--- | :--- |
+| **Consumer** | `alice@example.com` | `pass123` | Household donor with initial 100 green points. |
+| **Facility Staff** | `staff@greentech.org` | `staff123` | Senior operator at GreenTech Recycling Center. |
+| **Business User** | `contact@circularelectronics.com` | `biz123` | Circular Electronics Inc. (Refurbisher). |
+| **System Admin** | `admin@ewaste.org` | `admin123` | Platform Executive Governance & Compliance. |
+
+### 1. Running the Spring Boot Backend Locally
+```bash
+# Clone the repository
+git clone https://github.com/ahmedalivp/ewastetracking.git
+cd ewastetracking
+
+# Build and run with Spring Boot (defaults to port 8080 and H2 in-memory DB)
+mvn spring-boot:run
 ```
+- **Swagger Documentation**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **H2 Database Console**: [http://localhost:8080/h2-console](http://localhost:8080/h2-console) (JDBC URL: `jdbc:h2:mem:ewastedb`, User: `sa`, Password: *(empty)*)
 
-#### Get Drop-Off Points (`GET /api/drop-off-points`)
-- **Access**: Public
-- **Response (200 OK)**:
-```json
-[
-  {
-    "id": 1,
-    "label": "Downtown Public Drop Box A",
-    "lat": 37.775,
-    "lng": -122.418,
-    "facilityId": 1,
-    "facilityName": "GreenTech Recycling Center"
-  }
-]
-```
+### 2. Building & Installing the Android Mobile Client
+```bash
+cd android-app
 
----
+# Run unit tests
+./gradlew testDebugUnitTest
 
-### 3. Consumer Endpoints (`ROLE_CONSUMER`)
+# Assemble debug APK
+./gradlew assembleDebug
 
-#### Submit E-Waste Item (`POST /api/consumer/ewaste-items`)
-- **Access**: Bearer Token (`ROLE_CONSUMER`)
-- **Request**:
-```json
-{
-  "categoryId": 1,
-  "dropOffPointId": 1,
-  "deviceDescription": "Lenovo ThinkPad X1 Carbon with broken display"
-}
-```
-- **Response (201 Created)**:
-```json
-{
-  "id": 3,
-  "consumerId": 2,
-  "consumerName": "Alice Green",
-  "categoryId": 1,
-  "categoryName": "Laptop",
-  "dropOffPointId": 1,
-  "dropOffPointLabel": "Downtown Public Drop Box A",
-  "deviceDescription": "Lenovo ThinkPad X1 Carbon with broken display",
-  "status": "SUBMITTED",
-  "submittedAt": "2026-09-21T21:13:15.773327",
-  "componentCount": 0,
-  "hazardousMaterialCount": 0
-}
-```
-
-#### Get My Submissions (`GET /api/consumer/ewaste-items`)
-- **Access**: Bearer Token (`ROLE_CONSUMER`)
-- **Response (200 OK)**: List of consumer's submitted items.
-
-#### Get Item Tracking Timeline (`GET /api/consumer/ewaste-items/{id}/tracking`)
-- **Access**: Bearer Token (`ROLE_CONSUMER`)
-- **Response (200 OK)**:
-```json
-[
-  {
-    "id": 3,
-    "entityType": "EWASTE_ITEM",
-    "entityId": 3,
-    "status": "SUBMITTED",
-    "actorId": 2,
-    "actorName": "Alice Green",
-    "actorEmail": "alice@example.com",
-    "timestamp": "2026-09-21T21:13:15.774151",
-    "notes": "E-waste device registered in system for intake"
-  },
-  {
-    "id": 4,
-    "entityType": "EWASTE_ITEM",
-    "entityId": 3,
-    "status": "RECEIVED",
-    "actorId": 4,
-    "actorName": "John Tech",
-    "actorEmail": "staff@greentech.org",
-    "timestamp": "2026-09-21T21:13:15.820112",
-    "notes": "Item received and checked in at facility: GreenTech Recycling Center"
-  }
-]
-```
-
-#### Get Credits (`GET /api/consumer/credits`)
-- **Access**: Bearer Token (`ROLE_CONSUMER`)
-- **Response (200 OK)**:
-```json
-[
-  {
-    "id": 1,
-    "amount": 120,
-    "reason": "Recycling credit for salvaged component: 16GB DDR4 SODIMM RAM",
-    "awardedAt": "2026-09-21T21:13:15.975475"
-  }
-]
-```
-
-#### Redeem Credits (`POST /api/consumer/credits/redeem`)
-- **Access**: Bearer Token (`ROLE_CONSUMER`)
-- **Request**:
-```json
-{
-  "amount": 50,
-  "redeemedFor": "$15 Green Coffee Voucher"
-}
-```
-- **Response (200 OK)**:
-```json
-{
-  "id": 1,
-  "amount": 50,
-  "redeemedFor": "$15 Green Coffee Voucher",
-  "redeemedAt": "2026-09-21T21:13:16.006406",
-  "remainingBalance": 170
-}
+# Install directly on a connected physical device or running emulator
+./gradlew installDebug
 ```
 
 ---
 
-### 4. Facility Staff Endpoints (`ROLE_FACILITY_STAFF`)
+## Testing & Verification
 
-#### Intake Queue (`GET /api/facility/ewaste-items?status=SUBMITTED`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Response (200 OK)**: List of items awaiting check-in.
+The platform maintains comprehensive verification across both unit and system levels:
 
-#### Receive Item (`PUT /api/facility/ewaste-items/{id}/receive`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Response (200 OK)**: Item with status updated to `RECEIVED`.
-
-#### Categorize Item (`PUT /api/facility/ewaste-items/{id}/categorize`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Request**:
-```json
-{
-  "categoryId": 1,
-  "triageNotes": "Verified ThinkPad X1 Carbon. Screen and keyboard functional."
-}
-```
-- **Response (200 OK)**: Item with status updated to `CATEGORIZED`.
-
-#### Harvest Component (`POST /api/facility/ewaste-items/{id}/components`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Description**: Creates a `Component` entity in status `AVAILABLE`, triggers `CreditStrategy` to auto-award credits to the consumer, and creates immutable `TrackingRecord`s.
-- **Request**:
-```json
-{
-  "name": "16GB DDR4 SODIMM RAM",
-  "type": "RAM",
-  "condition": "GOOD"
-}
-```
-- **Response (201 Created)**:
-```json
-{
-  "id": 2,
-  "ewasteItemId": 3,
-  "categoryName": "Laptop",
-  "name": "16GB DDR4 SODIMM RAM",
-  "type": "RAM",
-  "condition": "GOOD",
-  "status": "AVAILABLE",
-  "harvestedAt": "2026-09-21T21:13:15.970828"
-}
-```
-
-#### Flag Hazardous Material (`POST /api/facility/ewaste-items/{id}/hazardous-materials`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Request**:
-```json
-{
-  "type": "BATTERY"
-}
-```
-- **Response (201 Created)**:
-```json
-{
-  "id": 2,
-  "ewasteItemId": 3,
-  "type": "BATTERY",
-  "diversionStatus": "FLAGGED"
-}
-```
-
-#### Divert Hazardous Material (`PUT /api/facility/hazardous-materials/{id}/divert`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Response (200 OK)**:
-```json
-{
-  "id": 2,
-  "ewasteItemId": 3,
-  "type": "BATTERY",
-  "diversionStatus": "DIVERTED"
-}
-```
-
-#### Update Component Requisition Status (`PUT /api/facility/component-requests/{id}/status`)
-- **Access**: Bearer Token (`ROLE_FACILITY_STAFF`)
-- **Request**:
-```json
-{
-  "status": "FULFILLED"
-}
-```
-- **Response (200 OK)**: Updated `ComponentRequestResponse` with `FULFILLED` status.
+- **Backend Unit & Integration Tests**:
+  - `mvn test`: 21 / 21 tests passing across `AuthControllerTest`, `ConsumerControllerTest`, `FacilityControllerTest`, and `CreditStrategyTest`.
+- **Live Cloud Health Check**:
+  ```bash
+  curl -X GET https://ewastetracking.onrender.com/api/impact
+  ```
+  Returns live diversion metrics from the Neon PostgreSQL cloud database.
+- **Physical Device Validation**:
+  - Validated on **NIC-LX2** (Android 15) with responsive rendering across light and dark architectural themes, horizontal swipe carousels, and live network communication over HTTPS.
 
 ---
 
-### 5. Business Marketplace Endpoints (`ROLE_BUSINESS`)
-
-#### Search Available Components (`GET /api/business/components?status=AVAILABLE`)
-- **Access**: Bearer Token (`ROLE_BUSINESS`)
-- **Response (200 OK)**: List of harvested components available for reuse.
-
-#### Request Component (`POST /api/business/component-requests`)
-- **Access**: Bearer Token (`ROLE_BUSINESS`)
-- **Request**:
-```json
-{
-  "componentId": 2
-}
-```
-- **Response (201 Created)**:
-```json
-{
-  "id": 1,
-  "businessId": 5,
-  "businessName": "Circular Electronics Inc.",
-  "componentId": 2,
-  "componentName": "16GB DDR4 SODIMM RAM",
-  "componentType": "RAM",
-  "componentCondition": "GOOD",
-  "status": "PENDING",
-  "requestedAt": "2026-09-21T21:13:16.109066"
-}
-```
-
-#### Get My Requisitions (`GET /api/business/component-requests`)
-- **Access**: Bearer Token (`ROLE_BUSINESS`)
-- **Response (200 OK)**: List of component requests initiated by the business.
-
----
-
-### 6. Admin Oversight Endpoints (`ROLE_ADMIN`)
-
-#### List Facilities (`GET /api/admin/facilities`)
-- **Access**: Bearer Token (`ROLE_ADMIN`)
-- **Response (200 OK)**: List of registered facilities.
-
-#### Verify Facility (`PUT /api/admin/facilities/{id}/verify`)
-- **Access**: Bearer Token (`ROLE_ADMIN`)
-- **Request**:
-```json
-{
-  "verified": true
-}
-```
-- **Response (200 OK)**: Updated `FacilityResponse` with `verifiedByAdmin: true`.
-
----
-
-## Postman Collection
-
-A complete Postman v2.1 collection is exported to:
-- [`docs/postman_collection.json`](file:///home/ahmed/Projects/ewastetracking/docs/postman_collection.json)
-
-Import the file directly into Postman. Requests are organized by role and lifecycle step with pre-request authentication variables automatically handled.
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
